@@ -1,2 +1,1 @@
-# steammend-be
-🕹 Steammend의 BackEnd Repository입니다.
+# 🕹 Steammend의 BackEnd Repository입니다.
