@@ -3,55 +3,56 @@ use steammend;
 
 
 # drop
-DROP TABLE IF EXISTS attache;
-DROP TABLE IF EXISTS reply;
-DROP TABLE IF EXISTS community;
-DROP TABLE IF EXISTS community_kind;
-DROP TABLE IF EXISTS member;
+DROP TABLE IF EXISTS attachements;
+DROP TABLE IF EXISTS replies;
+DROP TABLE IF EXISTS communities;
+DROP TABLE IF EXISTS members;
 
 
 # create
-CREATE TABLE member(
-mem_id VARCHAR(20) PRIMARY KEY,
-mem_pass VARCHAR(20) NOT NULL,
-mem_name VARCHAR(20) NOT NULL,
-mem_nickname VARCHAR(20) NOT NULL,
-mem_steam_id VARCHAR(30) NOT NULL,
-mem_state CHAR(1) NOT NULL
+CREATE TABLE members(
+	id 			VARCHAR(20) PRIMARY KEY,
+	password 	VARCHAR(500) NOT NULL ,
+	name 		VARCHAR(20) NOT NULL,
+	nickname 	VARCHAR(20) NOT NULL,
+	birth 		DATE NOT NULL,
+	steam_id 	VARCHAR(30) NOT NULL,
+	is_state 	TINYINT(1) NOT NULL
 );
 
 
-CREATE TABLE community(
-commu_no INT AUTO_INCREMENT PRIMARY KEY,
-mem_id VARCHAR(20) NOT NULL,
-commu_header VARCHAR(100) NOT NULL,
-commu_title VARCHAR(500) NOT NULL,
-commu_content TEXT NOT NULL,
-commu_hit INT NOT NULL DEFAULT 0,
-commu_state CHAR(1) NOT NULL
+CREATE TABLE communities(
+	community_id	BIGINT AUTO_INCREMENT PRIMARY KEY,
+	fk_member_id 		VARCHAR(20) NOT NULL,
+	header 			VARCHAR(100) NOT NULL,
+	title 			VARCHAR(500) NOT NULL,
+	content 		TEXT NOT NULL,
+    write_date 		TIMESTAMP DEFAULT NOW() NOT NULL,
+    hit 			INT NOT NULL DEFAULT 0,
+	is_state 		TINYINT(1) NOT NULL
 );
-ALTER TABLE community ADD CONSTRAINT FOREIGN KEY(mem_id) REFERENCES member(mem_id) ON UPDATE CASCADE;
+ALTER TABLE communities ADD CONSTRAINT FOREIGN KEY(fk_mem_id) REFERENCES member(id) ON UPDATE CASCADE;
 
 
-CREATE TABLE attache(
-atch_no INT AUTO_INCREMENT PRIMARY KEY,
-commu_no INT NOT NULL,
-atch_origin_name VARCHAR(3000) NOT NULL,
-atch_server_name VARCHAR(3000) NOT NULL,
-atch_path VARCHAR(1000) NOT NULL
+CREATE TABLE attachments(
+	attachment_id 	BIGINT AUTO_INCREMENT PRIMARY KEY,
+	fk_community_id BIGINT NOT NULL,
+	origin_name 	VARCHAR(3000) NOT NULL,
+	server_name 	VARCHAR(3000) NOT NULL,
+	path 			VARCHAR(1000) NOT NULL
 );
-ALTER TABLE attache ADD CONSTRAINT FOREIGN KEY(commu_no) REFERENCES community(commu_no) ON UPDATE CASCADE;
+ALTER TABLE attachments ADD CONSTRAINT FOREIGN KEY(fk_community_id) REFERENCES communities(community_id) ON UPDATE CASCADE;
 
 
-CREATE TABLE reply(
-reply_no INT AUTO_INCREMENT PRIMARY KEY,
-commu_no INT NOT NULL,
-mem_id VARCHAR(20) NOT NULL,
-reply_content VARCHAR(3000) NOT NULL,
-reply_date VARCHAR(20) NOT NULL,
-reply_state CHAR(1) NOT NULL
+CREATE TABLE replies(
+	reply_id		BIGINT AUTO_INCREMENT PRIMARY KEY,
+	fk_community_id BIGINT NOT NULL,
+	fk_member_id 	VARCHAR(20) NOT NULL,
+	content 		VARCHAR(3000) NOT NULL,
+	write_date 		TIMESTAMP DEFAULT NOW() NOT NULL,
+	is_state 		TINYINT(1) NOT NULL
 );
-ALTER TABLE reply ADD CONSTRAINT FOREIGN KEY(commu_no) REFERENCES community(commu_no) ON UPDATE CASCADE;
-ALTER TABLE reply ADD CONSTRAINT FOREIGN KEY(mem_id) REFERENCES member(mem_id) ON UPDATE CASCADE;
+ALTER TABLE replies ADD CONSTRAINT FOREIGN KEY(fk_community_id) REFERENCES communities(community_id) ON UPDATE CASCADE;
+ALTER TABLE replies ADD CONSTRAINT FOREIGN KEY(fk_member_id) REFERENCES members(id) ON UPDATE CASCADE;
 
 
