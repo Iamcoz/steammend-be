@@ -21,20 +21,21 @@ import lombok.ToString;
 @ToString
 
 @Entity
-public class Attache {
+public class Replies {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int atchNo;
+	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long replyId;
 	
-	private int commuNo;
+	private long communityId;
+
+	@NonNull
+	private String memberId;
 	
 	@NonNull
-	private String atchOriginName;
+	private String content;
 	
 	@NonNull
-	private String atchServerName;
+	private String writeDate;
 	
-	@NonNull
-	private String atchPath;
+	private boolean istate;
 }

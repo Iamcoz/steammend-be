@@ -21,12 +21,27 @@ import lombok.ToString;
 @ToString
 
 @Entity
-public class CommunityKind {
+public class Communities {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int commuKindNo;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long communityId;
 	
 	@NonNull
-	private String commuKindName;
+	private String memberId;
+	
+	@NonNull
+	private String header;
+	
+	@NonNull
+	private String title;
+	
+	@NonNull
+	private String content;
+	
+	@NonNull
+	private String writeDate;
+	
+	private int hit;
+	
+	private boolean isState;
 }

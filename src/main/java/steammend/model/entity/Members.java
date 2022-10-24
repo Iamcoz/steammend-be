@@ -1,8 +1,6 @@
 package steammend.model.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -21,22 +19,25 @@ import lombok.ToString;
 @ToString
 
 @Entity
-public class Reply {
+public class Members {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int replyNo;
-	
-	private int commuNo;
-
-	@NonNull
-	private String memId;
+	private String id;
 	
 	@NonNull
-	private String replyContent;
+	private String password;
 	
 	@NonNull
-	private String replyDate;
+	private String name;
 	
-	private char replyState;
+	@NonNull
+	private String nickname;
+	
+	@NonNull
+	private String birth;
+	
+	@NonNull
+	private String steamId;
+	
+	private boolean isState;
 }

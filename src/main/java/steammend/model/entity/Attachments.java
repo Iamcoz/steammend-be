@@ -1,6 +1,8 @@
 package steammend.model.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -19,19 +21,20 @@ import lombok.ToString;
 @ToString
 
 @Entity
-public class Member {
+public class Attachments {
 	
-	@Id
-	private String memId;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long attachmentId;
 	
-	@NonNull
-	private String memPass;
-	
-	@NonNull
-	private String memName;
+	private long communityId;
 	
 	@NonNull
-	private String memNickname;
+	private String originName;
 	
-	private char memState;
+	@NonNull
+	private String serverName;
+	
+	@NonNull
+	private String path;
 }
+
