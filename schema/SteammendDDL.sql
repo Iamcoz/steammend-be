@@ -31,7 +31,7 @@ CREATE TABLE communities(
     hit 			INT NOT NULL DEFAULT 0,
 	is_state 		TINYINT(1) NOT NULL
 );
-ALTER TABLE communities ADD CONSTRAINT FOREIGN KEY(member_id) REFERENCES member(id) ON UPDATE CASCADE;
+ALTER TABLE communities ADD CONSTRAINT FOREIGN KEY(member_id) REFERENCES members(id) ON UPDATE CASCADE;
 
 
 CREATE TABLE attachments(
@@ -46,8 +46,8 @@ ALTER TABLE attachments ADD CONSTRAINT FOREIGN KEY(community_id) REFERENCES comm
 
 CREATE TABLE replies(
 	reply_id		BIGINT AUTO_INCREMENT PRIMARY KEY,
-	community_id BIGINT NOT NULL,
-	member_id 	VARCHAR(20) NOT NULL,
+	community_id 	BIGINT NOT NULL,
+	member_id 		VARCHAR(20) NOT NULL,
 	content 		VARCHAR(3000) NOT NULL,
 	write_date 		TIMESTAMP DEFAULT NOW() NOT NULL,
 	is_state 		TINYINT(1) NOT NULL
