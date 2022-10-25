@@ -36,5 +36,6 @@ public class Attachments {
 	
 	@NonNull
 	private String path;
+
 }
 

@@ -15,6 +15,7 @@ import steammend.model.entity.Communities;
 @Builder
 @ToString
 public class CommunitiesDTO {
+	
 	private long communityId;
 	private String memberId;
 	private String header;
@@ -23,6 +24,27 @@ public class CommunitiesDTO {
 	private String writeDate;
 	private int hit;
 	private boolean isState;
+	private long attachmentId;
+	
+	
+	public CommunitiesDTO(String memberId, String header, String title, String content, boolean isState) {
+		this.memberId = memberId;
+		this.header = header;
+		this.title = title;
+		this.content = content;
+//		this.writeDate = writeDate;
+//		this.hit = hit;
+		this.isState = isState;
+	}
+	
+	public CommunitiesDTO(String memberId, String header, String title, String content, boolean isState, long attachmentId) {//, int hit, boolean isState) {
+		this.memberId = memberId;
+		this.header = header;
+		this.title = title;
+		this.content = content;
+		this.isState = isState;
+		this.attachmentId = attachmentId;
+	}
 	
 	public Communities toEntity() {
 		return 	Communities.builder().
@@ -36,4 +58,5 @@ public class CommunitiesDTO {
 				isState(isState).
 				build();
 	}
+
 }

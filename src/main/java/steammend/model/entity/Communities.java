@@ -1,9 +1,15 @@
 package steammend.model.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,10 +22,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
+@Setter 
 @Builder
 @ToString
 
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Communities {
 	
@@ -38,10 +45,14 @@ public class Communities {
 	@NonNull
 	private String content;
 	
-	@NonNull
-	private String writeDate;
+	@CreatedDate
+	private LocalDateTime writeDate;
 	
 	private int hit;
 	
 	private boolean isState;
+	
+//	private List<Attachments> attachments = new 
+	
+	
 }
