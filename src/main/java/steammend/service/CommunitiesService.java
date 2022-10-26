@@ -7,7 +7,10 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import steammend.exception.MessageException;
@@ -52,8 +55,15 @@ public class CommunitiesService {
 	}
 	
 	
-	public List<CommunitiesDTO> getAllCommunity() throws Exception{
-		List<Communities> commuAllEntity = commuDAO.findAll();
+	/** 전체 게시글을 10개씩 페이징 하여 조회
+	 * 
+	 * @param pageable
+	 * @return
+	 * @throws Exception
+	 */
+	public List<CommunitiesDTO> getAllCommunity(Pageable pageable) throws Exception{
+		Page<Communities> commuAllPageEntity = commuDAO.findAll(pageable);
+		List<Communities> commuAllEntity = commuAllPageEntity.getContent();
 		
 		if(commuAllEntity == null) {
 			throw new MessageException("존재하는 게시글이 없습니다.");
@@ -63,6 +73,18 @@ public class CommunitiesService {
 		
 		return commuAllDTO;
 	}
+	
+//	public List<CommunitiesDTO> getAllCommunity() throws Exception{
+//		List<Communities> commuAllEntity = commuDAO.findAll();
+//		
+//		if(commuAllEntity == null) {
+//			throw new MessageException("존재하는 게시글이 없습니다.");
+//		}
+//		
+//		List<CommunitiesDTO> commuAllDTO = Arrays.asList(mapper.map(commuAllEntity, CommunitiesDTO[].class));
+//		
+//		return commuAllDTO;
+//	}
 
 	/** 하나의 게시글 조회
 	 * 

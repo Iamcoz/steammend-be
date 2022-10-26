@@ -1,5 +1,7 @@
 package steammend.model;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +20,7 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Communities c SET c.hit = c.hit+1 WHERE c.communityId = :communityId")
 	int updateHitByCommunityId(long communityId);
+	
+//	@Query("SELECT * FROM Communities. c")
+//	Page<Communities> allCommunityWithPaging(Pageable pageable);
 }

@@ -3,6 +3,10 @@ package steammend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,27 +26,20 @@ public class CommunitiesController {
 	/* 하나의 게시글 작성 */
 	@PostMapping("/addCommunity")
 	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-//		boolean result = false;
-//
-//		if (commuDTO != null) {
-//			result = commuService.addCommunity(commuDTO);
-//
-//			if (result) {
-//				return result;
-//			} else {
-//				result = false;
-//			}
-//		}
-//		return result;
 		return commuService.addCommunity(commuDTO);
 	}
 
+	/* 전체 게시글을 10개씩 페이징 하여 조회 */
+	@GetMapping("/allCommunity")
+	public List<CommunitiesDTO> allCommunity(@PageableDefault(sort = "communityId", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
+		return commuService.getAllCommunity(pageable);
+	}
 	
 	/* 전체 게시글 조회 */
-	@GetMapping("/allCommunity")
-	public List<CommunitiesDTO> allCommunity() throws Exception{
-		return commuService.getAllCommunity();
-	}
+//	@GetMapping("/allCommunity")
+//	public List<CommunitiesDTO> allCommunity() throws Exception{
+//		return commuService.getAllCommunity();
+//	}
 	
 	
 	

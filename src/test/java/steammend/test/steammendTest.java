@@ -1,10 +1,18 @@
 package steammend.test;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import steammend.model.dto.CommunitiesDTO;
+import steammend.model.entity.Communities;
 import steammend.service.CommunitiesService;
 
 @SpringBootTest
@@ -27,14 +35,18 @@ public class steammendTest {
 	}
 	
 	
-	/* 전체 게시글 조회 */
+	/* 전체 게시글을 10개씩 페이징 하여 조회 */
 	@Test
 	void allCommunity() {
-		try {
-			commuService.getAllCommunity();
+		Pageable pagable = PageRequest.of(1, 10, Sort.Direction.DESC, "communityId");
+
+        try {
+			List<CommunitiesDTO> result = commuService.getAllCommunity(pagable);
+			System.out.println("**********\n" + result + "\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 	
 	
