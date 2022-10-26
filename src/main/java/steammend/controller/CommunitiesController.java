@@ -1,5 +1,7 @@
 package steammend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,27 +22,36 @@ public class CommunitiesController {
 	/* 하나의 게시글 작성 */
 	@PostMapping("/addCommunity")
 	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-		boolean result = false;
-
-		if (commuDTO != null) {
-			result = commuService.addCommunity(commuDTO);
-
-			if (result) {
-				return result;
-			} else {
-				result = false;
-			}
-		}
-		return result;
+//		boolean result = false;
+//
+//		if (commuDTO != null) {
+//			result = commuService.addCommunity(commuDTO);
+//
+//			if (result) {
+//				return result;
+//			} else {
+//				result = false;
+//			}
+//		}
+//		return result;
+		return commuService.addCommunity(commuDTO);
 	}
 
 	
-	/* 하나의 게시글 조회 */
+	/* 전체 게시글 조회 */
+	@GetMapping("/allCommunity")
+	public List<CommunitiesDTO> allCommunity() throws Exception{
+		return commuService.getAllCommunity();
+	}
+	
+	
+	
+	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
 	@GetMapping("/community")
 	public CommunitiesDTO community(long communityId) throws Exception {
+		commuService.modifyHit(communityId);
 		return commuService.getCommunity(communityId);
 	}
-	
 	
 	
 	/* 하나의 첨부파일 등록 */

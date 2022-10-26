@@ -1,5 +1,7 @@
 package steammend.service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -49,6 +51,18 @@ public class CommunitiesService {
 		return false;
 	}
 	
+	
+	public List<CommunitiesDTO> getAllCommunity() throws Exception{
+		List<Communities> commuAllEntity = commuDAO.findAll();
+		
+		if(commuAllEntity == null) {
+			throw new MessageException("존재하는 게시글이 없습니다.");
+		}
+		
+		List<CommunitiesDTO> commuAllDTO = Arrays.asList(mapper.map(commuAllEntity, CommunitiesDTO[].class));
+		
+		return commuAllDTO;
+	}
 
 	/** 하나의 게시글 조회
 	 * 
@@ -57,36 +71,49 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	public CommunitiesDTO getCommunity(long communityId) throws Exception {
+		
 		Optional<Communities> commuEntity = commuDAO.findById(communityId);
 		
 		if(commuEntity.get() == null) {
-			throw new MessageException("존재하지 않는 게시글 번호입니다.");
+			throw new MessageException("존재하지 않는 게시글입니다.");
 		}
 		
 		CommunitiesDTO commuDTO = mapper.map(commuEntity.get(), CommunitiesDTO.class);
+	
 		
 		return commuDTO;
 	}
 	
 	
-	/** 하나의 게시글 수정
+	/** 게시글 조회 시 조회수 1씩 증가
 	 * 
 	 * @param communityId
-	 * @param header
-	 * @param title
-	 * @param content
 	 * @return
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean modifyCommunity(long communityId, String header, String title, String content) throws Exception {
-		int result = commuDAO.updateCommunityByCommunityId(communityId, header, title, content);
-		
-		if (result == 0) {
-			throw new MessageException("게시글 수정 실패");
-		}
-		return true;
+	public int modifyHit(long communityId) throws Exception {
+		return commuDAO.updateHitByCommunityId(communityId);
 	}
+	
+//	/** 하나의 게시글 수정
+//	 * 
+//	 * @param communityId
+//	 * @param header
+//	 * @param title
+//	 * @param content
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	@Transactional
+//	public boolean modifyCommunity(long communityId, String header, String title, String content) throws Exception {
+//		int result = commuDAO.updateCommunityByCommunityId(communityId, header, title, content);
+//		
+//		if (result == 0) {
+//			throw new MessageException("게시글 수정 실패");
+//		}
+//		return true;
+//	}
 	
 	
 //	/** 하나의 첨부파일 등록
