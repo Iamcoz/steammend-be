@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> 실패 , 회원 정보 존재 </h1>
+	<h1> 실패 , login -> 회원 정보 존재 X or 회원가입 -> 이미 있는 회원 </h1>
 	
 	<a herf=""> </a>
 	

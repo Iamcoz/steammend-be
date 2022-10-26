@@ -21,6 +21,7 @@ public class MembersDTO {
 	private String nickname;
 	private String birth;
 	private String steamId;
+	private boolean isState;
 
 	public Members toEntity() {
 		return	Members.builder().
@@ -30,6 +31,7 @@ public class MembersDTO {
 				nickname(nickname).
 				birth(birth).
 				steamId(steamId).
+				isState(isState).
 				build();
 	}
 
