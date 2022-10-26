@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import steammend.model.dto.MembersDTO;
 import steammend.service.MemberService;
+import steammend.service.MemberServiceImpl;
 
 @RequiredArgsConstructor
 @Controller
 public class LoginJoinController {
 	
 	private final MemberService MemberService;
-	
+	private final MemberServiceImpl MemberServiceImpl;
 	
 	/*
 	 * 초기화면에서 로그인 선택
@@ -50,26 +51,22 @@ public class LoginJoinController {
 	public String userLogin(HttpServletRequest request) {
     	
 		HttpSession session = request.getSession();
-		System.out.println("세션 아이디 : "+session.getId());
-		
 		
 		String id = request.getParameter("bm_id");
 		String pw = request.getParameter("bm_pw");
 		MembersDTO dto = new MembersDTO(id,pw);
-		System.out.println("dto : "+ dto.getId()+"     "+dto.getPassword());
 		
 		
-		MembersDTO res = MemberService.login(dto);
-		System.out.println("res : " + res);
-		System.out.println("=======================================");
 		
-		if(res != null) {
+		if(MemberServiceImpl.checkLogin(id, pw) != null) {
+			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
 			session.setAttribute("res", res);
 			return "succ";
 		}
 		else {
 			return "fail";
 		}
+		
     }
     
 	
@@ -111,15 +108,12 @@ public class LoginJoinController {
 		String steamId = request.getParameter("steam_id");
 		boolean isState = true;
 		MembersDTO dto = new MembersDTO(id, pw, name, nickName, birth, steamId, isState);
-		System.out.println("dto : "+ dto);
 		
 		try {
 			MemberService.insert(dto);
 			session.setAttribute("res", dto);
-			System.out.println("가입 성공");
 			return "succ";
 		}catch(Exception e){
-			System.out.println("가입 실패");
 			return "fail";
 		}
 		

@@ -1,6 +1,9 @@
 package steammend.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -12,18 +15,54 @@ import steammend.model.dto.MembersDTO;
 public class MemberServiceImpl implements MemberService{
 
 	@Autowired
-	private MemberMapper MemberMapper;
+	private MemberMapper memberMapper;
+	
+	@Autowired
+    PasswordEncoder passwordEncoder;
+	
 
 	@Override
 	public MembersDTO login(MembersDTO dto) {
 		
-		System.out.println("serviceIMPL에서의 dto : " +MemberMapper.login(dto));
-		
-		return MemberMapper.login(dto);
+		return memberMapper.login(dto);
 	}
 	
 	@Override
 	public MembersDTO insert(MembersDTO dto) {
-		return MemberMapper.insert(dto);
+		
+		dto = encryptPassword(dto);
+		return memberMapper.insert(dto);
 	}
+	
+	@Override
+	public MembersDTO findById(String id) {
+		
+		return memberMapper.findById(id);
+	}
+	
+	
+	@Transactional
+    public MembersDTO encryptPassword(MembersDTO join){
+		
+		String enPw = passwordEncoder.encode(join.getPassword());
+		join.setPassword(enPw);
+        return join; 
+    }
+	
+	
+	/*
+	 * 	@logic  row 비밀번호, 암호화 비밀번호 비교
+	 * 	
+	 */
+	public MembersDTO checkLogin(String id, String rawPw){
+		MembersDTO dto = memberMapper.findById(id);
+		System.out.println("넘어온 객체 dto : "+dto);
+	    if(passwordEncoder.matches(rawPw, dto.getPassword())){
+	    	
+	    	return dto;
+	    } else{
+	    	return null;
+	    }
+	}
+	
 }
