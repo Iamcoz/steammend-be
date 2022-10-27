@@ -129,18 +129,21 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId) throws Exception {
-		CommunitiesDTO commuDTO =  getCommunity(communityId); // 임시 세션값
+	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId/*session*/) throws Exception {
+		CommunitiesDTO commuDTO = getCommunity(communityId);
 		
 		int result = 0;
 		
-		if(commuDTO.getCommunityId() != 0 && commuDTO.getMemberId() != null) { // 이 부분 null을 로그인값으로 change
+		if(communityId != 0 && commuDTO.getMemberId() != null) { // 임시코드
+//		if(communityId != 0 && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
 			result = commuDAO.updateCommunityByCommunityId(communityId, header, title, content, memberId);
 		} else if (result == 0) {
 			throw new MessageException("게시글 수정 실패");
 		}
 		return true;
 	}
+	
+	
 	
 //	/** 하나의 첨부파일 등록
 //	 * 

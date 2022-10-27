@@ -52,8 +52,8 @@ public class CommunitiesController {
 	
 	/* 하나의 게시글 수정 */
 	@PostMapping("/modify")
-	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId) throws Exception {
-		return commuService.modifyCommunity(communityId, header, title, content, memberId);
+	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId/*session*/) throws Exception {
+		return commuService.modifyCommunity(communityId, header, title, content, memberId/*session*/);
 	}
 	
 	/* 하나의 첨부파일 등록 */
