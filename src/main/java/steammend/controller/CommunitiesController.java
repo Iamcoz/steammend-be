@@ -24,7 +24,7 @@ public class CommunitiesController {
 	private CommunitiesService commuService;
 
 	/* 하나의 게시글 작성 */
-	@PostMapping("/addCommunity")
+	@PostMapping("/add")
 	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
 		return commuService.addCommunity(commuDTO);
 	}
@@ -42,7 +42,6 @@ public class CommunitiesController {
 //	}
 	
 	
-	
 	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
 	@GetMapping("/community")
 	public CommunitiesDTO community(long communityId) throws Exception {
@@ -50,6 +49,12 @@ public class CommunitiesController {
 		return commuService.getCommunity(communityId);
 	}
 	
+	
+	/* 하나의 게시글 수정 */
+	@PostMapping("/modify")
+	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId) throws Exception {
+		return commuService.modifyCommunity(communityId, header, title, content, memberId);
+	}
 	
 	/* 하나의 첨부파일 등록 */
 //	@PostMapping("/addComunity")

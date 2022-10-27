@@ -7,7 +7,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -118,25 +117,30 @@ public class CommunitiesService {
 		return commuDAO.updateHitByCommunityId(communityId);
 	}
 	
-//	/** 하나의 게시글 수정
-//	 * 
-//	 * @param communityId
-//	 * @param header
-//	 * @param title
-//	 * @param content
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	@Transactional
-//	public boolean modifyCommunity(long communityId, String header, String title, String content) throws Exception {
-//		int result = commuDAO.updateCommunityByCommunityId(communityId, header, title, content);
-//		
-//		if (result == 0) {
-//			throw new MessageException("게시글 수정 실패");
-//		}
-//		return true;
-//	}
 	
+	/** 하나의 게시글 수정
+	 * 
+	 * @param communityId
+	 * @param header
+	 * @param title
+	 * @param content
+	 * @param memberId
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId) throws Exception {
+		CommunitiesDTO commuDTO =  getCommunity(communityId); // 임시 세션값
+		
+		int result = 0;
+		
+		if(commuDTO.getCommunityId() != 0 && commuDTO.getMemberId() != null) { // 이 부분 null을 로그인값으로 change
+			result = commuDAO.updateCommunityByCommunityId(communityId, header, title, content, memberId);
+		} else if (result == 0) {
+			throw new MessageException("게시글 수정 실패");
+		}
+		return true;
+	}
 	
 //	/** 하나의 첨부파일 등록
 //	 * 
