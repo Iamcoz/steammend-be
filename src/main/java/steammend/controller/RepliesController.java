@@ -40,4 +40,11 @@ public class RepliesController {
 										replyDTO.getMemberId());
 	}
 	
+	
+	/* 하나의 게시글 삭제 */
+	@PostMapping("/delete")
+	public boolean deleteReply(@RequestBody RepliesDTO replyDTO) throws Exception {
+		return replyService.deleteReply(replyDTO.getReplyId());
+	}
+	
 }

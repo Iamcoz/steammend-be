@@ -47,7 +47,7 @@ public class RepliesTest {
 	
 	
 	/* 하나의 댓글 수정 */
-	@Test
+//	@Test
 	void modifyReply() {
 		Long replyId = 17L;
 		String content = "내 수정 용";
@@ -55,6 +55,19 @@ public class RepliesTest {
 		
 		try {
 			replyService.modifyReply(replyId, content, memberId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/* 하나의 댓글 삭제(수정) */
+	@Test
+	void deleteReply() {
+		Long replyId = 12L;
+		
+		try {
+			replyService.deleteReply(replyId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

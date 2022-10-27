@@ -79,10 +79,32 @@ public class RepliesService {
 		int result = 0;
 		
 		if(replyId != 0 && replyDTO.getMemberId() != null) {  // 임시코드
-//		if(replyId != 0 && replyDTO.getMemberId() = 세션id값) {  // 수정 방향 코드
+//		if(replyId != 0 && replyDTO.getMemberId() == 세션id값) {  // 수정 방향 코드
 			result = replyDAO.updateReplyContentByReplyId(replyId, content, memberId);
 		} else if (result == 0) {
 			throw new MessageException("댓글 수정 실패");
+		}
+		return true;
+	}
+	
+	
+	/** 하나의 댓글 삭제(수정)
+	 * 
+	 * @param replyId
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean deleteReply(Long replyId) throws Exception {
+		RepliesDTO replyDTO = getReply(replyId);
+		
+		int result = 0;
+		
+		if(replyId != 0 && replyDTO.isState() == true && replyDTO.getMemberId() !=  null) { // 임시 코드
+//		if(replyId != 0 && replyDTO.isState() == true && replyDTO.getMemberId() == 세션값) { // 수정 지향
+			result = replyDAO.deleteReplyByReplyId(replyId);
+		} else if(result == 0) {
+			throw new MessageException("댓글 삭제 실패");
 		}
 		return true;
 	}
