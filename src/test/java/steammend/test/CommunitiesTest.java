@@ -1,7 +1,5 @@
 package steammend.test;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +42,7 @@ public class CommunitiesTest {
 		Pageable pagable = PageRequest.of(1, 10, Sort.Direction.DESC, "communityId");
 
         try {
-			List<CommunitiesDTO> result = commuService.getAllCommunity(pagable);
+			commuService.getAllCommunity(pagable);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,7 +53,7 @@ public class CommunitiesTest {
 	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
 //	@Test
 	void community() {
-		long communityId = 3;
+		Long communityId = 15L;
 		
 		try {
 			commuService.modifyHit(communityId);
@@ -69,7 +67,7 @@ public class CommunitiesTest {
 	/* 하나의 게시글 수정 */
 	@Test
 	void modifyCommunity() {
-		long communityId = 3;
+		Long communityId = 17L;
 		String header = "수정 말머리";
 		String title = "수정 제목";
 		String content = "수정 내용";
@@ -77,6 +75,19 @@ public class CommunitiesTest {
 		
 		try {
 			commuService.modifyCommunity(communityId, header, title, content, memberId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/* 하나의 게시글 삭제(수정) */
+//	@Test
+	void deleteCommunity() {
+		Long communityId = 18L;
+		
+		try {
+			commuService.deleteCommunity(communityId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

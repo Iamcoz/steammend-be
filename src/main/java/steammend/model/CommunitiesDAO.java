@@ -12,9 +12,13 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Communities c SET c.hit = c.hit+1 WHERE c.communityId = :communityId")
-	int updateHitByCommunityId(long communityId);
+	int updateHitByCommunityId(Long communityId);
 	
-	@Modifying
+	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Communities c SET c.header = :header, c.title = :title, c.content = :content WHERE c.communityId = :communityId AND c.memberId = :memberId")
-	int updateCommunityByCommunityId(long communityId, String header, String title, String content, String memberId);
+	int updateCommunityByCommunityId(Long communityId, String header, String title, String content, String memberId);
+
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Communities c SET c.isState = 0 WHERE c.communityId = :communityId")
+	int deleteCommunityByCommunityId(Long communityId);
 }

@@ -17,13 +17,13 @@ import steammend.model.entity.Attachments;
 
 //@ConfigurationProperties(prefix="file")
 public class AttachmentsDTO {
-	private long attachmentId;
-	private long communityId;
+	private Long attachmentId;
+	private Long communityId;
 	private String originName;
 	private String serverName;
 	private String path;
 	
-	public AttachmentsDTO(long communityId, String originName, String serverName, String path) {
+	public AttachmentsDTO(Long communityId, String originName, String serverName, String path) {
 		this.communityId = communityId;
 		this.originName = originName;
 		this.serverName = serverName;

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -31,9 +32,9 @@ import lombok.ToString;
 public class Replies {
 	
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long replyId;
+	private Long replyId;
 	
-	private long communityId;
+	private Long communityId;
 
 	@NonNull
 	private String memberId;
@@ -44,5 +45,5 @@ public class Replies {
 	@CreatedDate
 	private LocalDateTime writeDate;
 	
-	private boolean istate;
+	private boolean isState;
 }

@@ -3,7 +3,6 @@ package steammend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -23,18 +22,19 @@ public class CommunitiesController {
 	@Autowired
 	private CommunitiesService commuService;
 
+	
 	/* 하나의 게시글 작성 */
 	@PostMapping("/add")
 	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
 		return commuService.addCommunity(commuDTO);
 	}
 
+	
 	/* 전체 게시글을 10개씩 페이징 하여 조회 */
 	@GetMapping("/allCommunity")
 	public List<CommunitiesDTO> allCommunity(@PageableDefault(sort = "communityId", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
 		return commuService.getAllCommunity(pageable);
 	}
-	
 	/* 전체 게시글 조회 */
 //	@GetMapping("/allCommunity")
 //	public List<CommunitiesDTO> allCommunity() throws Exception{
@@ -44,7 +44,7 @@ public class CommunitiesController {
 	
 	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
 	@GetMapping("/community")
-	public CommunitiesDTO community(long communityId) throws Exception {
+	public CommunitiesDTO community(Long communityId) throws Exception {
 		commuService.modifyHit(communityId);
 		return commuService.getCommunity(communityId);
 	}
@@ -52,9 +52,37 @@ public class CommunitiesController {
 	
 	/* 하나의 게시글 수정 */
 	@PostMapping("/modify")
-	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId) throws Exception {
-		return commuService.modifyCommunity(communityId, header, title, content, memberId);
+	public boolean modifyCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+		return	commuService.modifyCommunity(commuDTO.getCommunityId(), 
+											commuDTO.getHeader(), 
+											commuDTO.getTitle(), 
+											commuDTO.getContent(),
+											commuDTO.getMemberId());
+		
 	}
+	
+	
+	/* 하나의 게시글 삭제 */
+	@PostMapping("/delete")
+	public boolean deleteCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+		return commuService.deleteCommunity(commuDTO.getCommunityId());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/* 하나의 첨부파일 등록 */
 //	@PostMapping("/addComunity")
@@ -83,7 +111,7 @@ public class CommunitiesController {
 //			atchDTO.setServerName(serverName);
 //			atchDTO.setPath(localPath);
 //			
-//			long attachmentId = commuService.addAttchment(atchDTO);
+//			Long attachmentId = commuService.addAttchment(atchDTO);
 //			commuDTO.setAttachmentId(attachmentId);
 //			commuService.addCommunity(commuDTO, atchDTO);
 //			

@@ -24,9 +24,9 @@ import lombok.ToString;
 public class Attachments {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long attachmentId;
+	private Long attachmentId;
 	
-	private long communityId;
+	private Long communityId;
 	
 	@NonNull
 	private String originName;

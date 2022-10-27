@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import steammend.exception.MessageException;
 import steammend.model.CommunitiesDAO;
@@ -22,14 +23,13 @@ public class CommunitiesService {
 
 	@Autowired
 	private CommunitiesDAO commuDAO;
-	
+
 //	@Autowired
 //	private AttachmentsDAO atchDAO;
-	
-	
 
 	private ModelMapper mapper = new ModelMapper();
 
+	
 	/**
 	 * 하나의 게시글 작성
 	 * 
@@ -38,8 +38,8 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	public boolean addCommunity(CommunitiesDTO commuDTO) throws Exception {
-
 		Communities commuEntity = mapper.map(commuDTO, Communities.class);
+
 		try {
 			commuEntity = commuDAO.save(commuEntity);
 
@@ -72,7 +72,7 @@ public class CommunitiesService {
 		
 		return commuAllDTO;
 	}
-	
+	/* 전체 게시글 조회 */
 //	public List<CommunitiesDTO> getAllCommunity() throws Exception{
 //		List<Communities> commuAllEntity = commuDAO.findAll();
 //		
@@ -129,18 +129,59 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId) throws Exception {
-		CommunitiesDTO commuDTO =  getCommunity(communityId); // 임시 세션값
+	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId/*session*/) throws Exception {
+		CommunitiesDTO commuDTO = getCommunity(communityId);
 		
 		int result = 0;
 		
-		if(commuDTO.getCommunityId() != 0 && commuDTO.getMemberId() != null) { // 이 부분 null을 로그인값으로 change
+		if(communityId != 0 && commuDTO.getMemberId() != null) { // 임시코드
+//		if(communityId != 0 && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
 			result = commuDAO.updateCommunityByCommunityId(communityId, header, title, content, memberId);
 		} else if (result == 0) {
 			throw new MessageException("게시글 수정 실패");
 		}
 		return true;
 	}
+	
+	
+	/** 하나의 게시글 삭제(수정)
+	 * 
+	 * @param communityId
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean deleteCommunity(long communityId) throws Exception {
+		CommunitiesDTO commuDTO = getCommunity(communityId);
+		
+		int result = 0;
+		
+		if(communityId != 0 && commuDTO.isState() == true && commuDTO.getMemberId() != null) { // 임시코드
+//		if(communityId != 0 && commuDTO.isState() == true && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
+			result = commuDAO.deleteCommunityByCommunityId(communityId);
+		} else if(result == 0) {
+			throw new MessageException("게시글 삭제 실패");
+		}
+		return true;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 //	/** 하나의 첨부파일 등록
 //	 * 
