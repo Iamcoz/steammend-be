@@ -15,12 +15,13 @@ import steammend.model.entity.Replies;
 @Builder
 @ToString
 public class RepliesDTO {
-	private Long replyId;
+	private Long id;
 	private Long communityId;
 	private String memberId;
 	private String content;
-	private String writeDate;
-	private boolean isState;
+	private String createdAt;
+	private String updatedAt;
+	private boolean isDeleted;
 	
 	
 	public RepliesDTO(Long communityId, String memberId, String content) {
@@ -37,7 +38,7 @@ public class RepliesDTO {
 				memberId(memberId).
 				content(content).
 //				writeDate(writeDate).
-				isState(isState).
+				isDeleted(isDeleted).
 				build();
 	}
 }

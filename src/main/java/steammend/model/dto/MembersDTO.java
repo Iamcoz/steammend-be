@@ -21,7 +21,19 @@ public class MembersDTO {
 	private String nickname;
 	private String birth;
 	private String steamId;
-	private boolean isState;
+	private String createdAt;
+	private String updatedAt;
+	private boolean isDeleted;
+	
+	public MembersDTO(String id, String password, String name, String nickname, String birth, String steamId, boolean isDeleted) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.nickname = nickname;
+		this.birth = birth;
+		this.steamId = steamId;
+		this.isDeleted = isDeleted;
+	}
 
 	public Members toEntity() {
 		return	Members.builder().
@@ -31,7 +43,7 @@ public class MembersDTO {
 				nickname(nickname).
 				birth(birth).
 				steamId(steamId).
-				isState(isState).
+				isDeleted(isDeleted).
 				build();
 	}
 }

@@ -17,16 +17,15 @@ import steammend.model.entity.Attachments;
 
 //@ConfigurationProperties(prefix="file")
 public class AttachmentsDTO {
-	private Long attachmentId;
+	private Long id;
 	private Long communityId;
-	private String originName;
-	private String serverName;
 	private String path;
+	private String createdAt;
+	private String updatedAt;
+	private boolean isDeleted;
 	
-	public AttachmentsDTO(Long communityId, String originName, String serverName, String path) {
-		this.communityId = communityId;
-		this.originName = originName;
-		this.serverName = serverName;
+	public AttachmentsDTO(Long communityId, String path) {
+		this.id = communityId;
 		this.path = path;
 	}
 	
@@ -34,8 +33,6 @@ public class AttachmentsDTO {
 		return 	Attachments.builder().
 //				attachmentId(attachmentId).
 				communityId(communityId).
-				originName(originName).
-				serverName(serverName).
 				path(path).
 				build();
 	}

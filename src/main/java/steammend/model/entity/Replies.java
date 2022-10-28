@@ -32,8 +32,9 @@ import lombok.ToString;
 public class Replies {
 	
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long replyId;
+	private Long id;
 	
+	@NonNull
 	private Long communityId;
 
 	@NonNull
@@ -43,7 +44,10 @@ public class Replies {
 	private String content;
 	
 	@CreatedDate
-	private LocalDateTime writeDate;
+	private LocalDateTime createdAt;
 	
-	private boolean isState;
+	@CreatedDate
+	private LocalDateTime updatedAt;
+
+	private boolean isDeleted;
 }

@@ -31,7 +31,7 @@ import lombok.ToString;
 public class Communities {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long communityId;
+	private Long id;
 	
 	@NonNull
 	private String memberId;
@@ -45,12 +45,15 @@ public class Communities {
 	@NonNull
 	private String content;
 	
-	@CreatedDate
-	private LocalDateTime writeDate;
-	
 	private int hit;
 	
-	private boolean isState;
+	@CreatedDate
+	private LocalDateTime createdAt;
+	
+	@CreatedDate
+	private LocalDateTime updatedAt;
+
+	private boolean isDeleted;
 	
 //	private List<Attachments> attachments = new 
 	

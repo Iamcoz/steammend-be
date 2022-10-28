@@ -23,50 +23,50 @@ public class CommunitiesController {
 	private CommunitiesService commuService;
 
 	
-	/* 하나의 게시글 작성 */
-	@PostMapping("/add")
-	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-		return commuService.addCommunity(commuDTO);
-	}
+//	/* 하나의 게시글 작성 */
+//	@PostMapping("/add")
+//	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+//		return commuService.addCommunity(commuDTO);
+//	}
 
 	
-	/* 전체 게시글을 10개씩 페이징 하여 조회 */
-	@GetMapping("/allCommunity")
-	public List<CommunitiesDTO> allCommunity(@PageableDefault(sort = "communityId", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
-		return commuService.getAllCommunity(pageable);
-	}
-	/* 전체 게시글 조회 */
+//	/* 전체 게시글을 10개씩 페이징 하여 조회 */
 //	@GetMapping("/allCommunity")
-//	public List<CommunitiesDTO> allCommunity() throws Exception{
-//		return commuService.getAllCommunity();
+//	public List<CommunitiesDTO> allCommunity(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
+//		return commuService.getAllCommunity(pageable);
 //	}
-	
-	
-	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
-	@GetMapping("/community")
-	public CommunitiesDTO community(Long communityId) throws Exception {
-		commuService.modifyHit(communityId);
-		return commuService.getCommunity(communityId);
-	}
-	
-	
-	/* 하나의 게시글 수정 */
-	@PostMapping("/modify")
-	public boolean modifyCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-		return	commuService.modifyCommunity(commuDTO.getCommunityId(), 
-											commuDTO.getHeader(), 
-											commuDTO.getTitle(), 
-											commuDTO.getContent(),
-											commuDTO.getMemberId());
-		
-	}
-	
-	
-	/* 하나의 게시글 삭제 */
-	@PostMapping("/delete")
-	public boolean deleteCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-		return commuService.deleteCommunity(commuDTO.getCommunityId());
-	}
+//	/* 전체 게시글 조회 */
+////	@GetMapping("/allCommunity")
+////	public List<CommunitiesDTO> allCommunity() throws Exception{
+////		return commuService.getAllCommunity();
+////	}
+//	
+//	
+//	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
+//	@GetMapping("/community")
+//	public CommunitiesDTO community(Long id) throws Exception {
+//		commuService.modifyHit(id);
+//		return commuService.getCommunity(id);
+//	}
+//	
+//	
+//	/* 하나의 게시글 수정 */
+//	@PostMapping("/modify")
+//	public boolean modifyCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+//		return	commuService.modifyCommunity(commuDTO.getId(), 
+//											commuDTO.getHeader(), 
+//											commuDTO.getTitle(), 
+//											commuDTO.getContent(),
+//											commuDTO.getMemberId());
+//		
+//	}
+//	
+//	
+//	/* 하나의 게시글 삭제 */
+//	@PostMapping("/delete")
+//	public boolean deleteCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+//		return commuService.deleteCommunity(commuDTO.getId());
+//	}
 	
 	
 	
