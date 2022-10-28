@@ -91,7 +91,7 @@ public class CommunitiesService {
 	 * @return
 	 * @throws Exception
 	 */
-	public CommunitiesDTO getCommunity(long communityId) throws Exception {
+	public CommunitiesDTO getCommunity(Long communityId) throws Exception {
 		
 		Optional<Communities> commuEntity = commuDAO.findById(communityId);
 		
@@ -113,7 +113,7 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public int modifyHit(long communityId) throws Exception {
+	public int modifyHit(Long communityId) throws Exception {
 		return commuDAO.updateHitByCommunityId(communityId);
 	}
 	
@@ -129,7 +129,7 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean modifyCommunity(long communityId, String header, String title, String content, String memberId/*session*/) throws Exception {
+	public boolean modifyCommunity(Long communityId, String header, String title, String content, String memberId/*session*/) throws Exception {
 		CommunitiesDTO commuDTO = getCommunity(communityId);
 		
 		int result = 0;
@@ -151,7 +151,7 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean deleteCommunity(long communityId) throws Exception {
+	public boolean deleteCommunity(Long communityId) throws Exception {
 		CommunitiesDTO commuDTO = getCommunity(communityId);
 		
 		int result = 0;
@@ -190,7 +190,7 @@ public class CommunitiesService {
 //	 * @throws Exception
 //	 */
 //	@Transactional
-//	public long addCommunity(CommunitiesDTO commuDTO, AttachmentsDTO atchDTO) throws Exception {
+//	public Long addCommunity(CommunitiesDTO commuDTO, AttachmentsDTO atchDTO) throws Exception {
 //		Communities commuEntity = mapper.map(commuDTO, Communities.class);
 //		Attachments atchEntity = mapper.map(atchDTO, Attachments.class);
 //		
