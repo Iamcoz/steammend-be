@@ -23,11 +23,11 @@ public class CommunitiesController {
 	private CommunitiesService commuService;
 
 	
-//	/* 하나의 게시글 작성 */
-//	@PostMapping("/add")
-//	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-//		return commuService.addCommunity(commuDTO);
-//	}
+	/* 하나의 게시글 작성 */
+	@PostMapping("/add")
+	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+		return commuService.addCommunity(commuDTO);
+	}
 
 	
 //	/* 전체 게시글을 10개씩 페이징 하여 조회 */

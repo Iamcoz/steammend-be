@@ -29,15 +29,22 @@ public class CommunitiesDTO {
 //	private Long attachmentId;
 	
 	
-	public CommunitiesDTO(String memberId, String header, String title, String content, boolean isDeleted) {
+	public CommunitiesDTO(String memberId, String header, String title, String content) {
 		this.memberId = memberId;
 		this.header = header;
 		this.title = title;
 		this.content = content;
-//		this.writeDate = writeDate;
-//		this.hit = hit;
-		this.isDeleted = isDeleted;
 	}
+	
+//	public CommunitiesDTO(String memberId, String header, String title, String content, boolean isDeleted) {
+//		this.memberId = memberId;
+//		this.header = header;
+//		this.title = title;
+//		this.content = content;
+////		this.writeDate = writeDate;
+////		this.hit = hit;
+//		this.isDeleted = isDeleted;
+//	}
 	
 //	public CommunitiesDTO(String memberId, String header, String title, String content, boolean isDeleted, Long attachmentId) {//, int hit, boolean isState) {
 //		this.memberId = memberId;
@@ -57,7 +64,7 @@ public class CommunitiesDTO {
 				content(content).
 //				writeDate(writeDate).
 //				hit(hit).
-				isDeleted(isDeleted).
+//				isDeleted(isDeleted).
 				build();
 	}
 

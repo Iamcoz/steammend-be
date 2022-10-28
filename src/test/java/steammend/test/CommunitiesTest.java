@@ -23,17 +23,17 @@ public class CommunitiesTest {
 	CommunitiesService commuService;
 	
 	
-//	/* 하나의 게시글 등록 */
-////	@Test
-//	void addCommunity() {
-//		CommunitiesDTO commuDTO =  new CommunitiesDTO("coz", "말머리", "제목", "내용", true);
-//		
-//		try {
-//			commuService.addCommunity(commuDTO);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	/* 하나의 게시글 등록 */
+	@Test
+	void addCommunity() {
+		CommunitiesDTO commuDTO = new CommunitiesDTO("coz", "말머리", "제목", "내용");
+		
+		try {
+			commuService.addCommunity(commuDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 //	
 //	
 //	/* 전체 게시글을 10개씩 페이징 하여 조회 */

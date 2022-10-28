@@ -29,28 +29,28 @@ public class CommunitiesService {
 	private ModelMapper mapper = new ModelMapper();
 
 	
-//	/**
-//	 * 하나의 게시글 작성
-//	 * 
-//	 * @param commuDTO
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public boolean addCommunity(CommunitiesDTO commuDTO) throws Exception {
-//		Communities commuEntity = mapper.map(commuDTO, Communities.class);
-//
-//		try {
-//			commuEntity = commuDAO.save(commuEntity);
-//
-//			if (commuEntity != null) {
-//				return true;
-//			}
-//		} catch (Exception e) {
-//			throw new MessageException("게시글 작성 실패");
-//		}
-//
-//		return false;
-//	}
+	/**
+	 * 하나의 게시글 작성
+	 * 
+	 * @param commuDTO
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean addCommunity(CommunitiesDTO commuDTO) throws Exception {
+		Communities commuEntity = mapper.map(commuDTO, Communities.class);
+
+		try {
+			commuEntity = commuDAO.save(commuEntity);
+
+			if (commuEntity != null) {
+				return true;
+			}
+		} catch (Exception e) {
+			throw new MessageException("게시글 작성 실패");
+		}
+
+		return false;
+	}
 //	
 //	
 //	/** 전체 게시글을 10개씩 페이징 하여 조회
