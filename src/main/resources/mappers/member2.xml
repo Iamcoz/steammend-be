@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 
 <mapper namespace="steammend.model.MemberMapper">
  <select id="insert" parameterType = "steammend.model.dto.MembersDTO" resultType="steammend.model.dto.MembersDTO">
-  insert into members (id, password, name, nickname, birth, steam_id) values (#{id}, #{password}, #{name}, #{nickname}, #{birth}, #{steamId});
+  insert into members (id, password, name, nickname, birth, steam_id, created_at) values (#{id}, #{password}, #{name}, #{nickname}, #{birth}, #{steamId}, now());
  	 
  </select>
 </mapper>

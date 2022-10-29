@@ -114,8 +114,8 @@ public class LoginJoinController {
 		String nickName = request.getParameter("nickname");
 		String birth = request.getParameter("birth");
 		String steamId = request.getParameter("steam_id");
-		boolean isState = true;
-		MembersDTO dto = new MembersDTO(id, pw, name, nickName, birth, steamId, isState);
+		boolean isDeleted = false;
+		MembersDTO dto = new MembersDTO(id, pw, name, nickName, birth, steamId);
 		
 		try {
 			MemberService.insert(dto);

@@ -1,7 +1,11 @@
 package steammend.model.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import org.springframework.data.annotation.CreatedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,5 +42,11 @@ public class Members {
 	@NonNull
 	private String steamId;
 	
-	private boolean isState;
+	@CreatedDate
+	private LocalDateTime createdAt;
+	
+	@CreatedDate
+	private LocalDateTime updatedAt;
+
+	private boolean isDeleted;
 }
