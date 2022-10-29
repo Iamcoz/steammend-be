@@ -68,7 +68,8 @@ public class LoginJoinController {
 		
 		if(MemberServiceImpl.checkLogin(id, pw) != null) {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
-			session.setAttribute("res", res);
+			session.setAttribute(res.getId(), res.getId());
+			System.out.println("session 출력 : "+session.getAttribute(res.getId()));
 			return "succ";
 		}
 		else {
@@ -119,7 +120,8 @@ public class LoginJoinController {
 		
 		try {
 			MemberService.insert(dto);
-			session.setAttribute("res", dto);
+			session.setAttribute(dto.getId(), dto.getId());
+			System.out.println("session 출력 : "+session.getAttribute(dto.getId()));
 			return "succ";
 		}catch(Exception e){
 			return "fail";
