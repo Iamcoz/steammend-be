@@ -12,11 +12,11 @@ DROP TABLE IF EXISTS members;
 # create
 CREATE TABLE members(
 	id VARCHAR(20) PRIMARY KEY,
-	password VARCHAR(500) NOT NULL ,
+	password VARCHAR(60) NOT NULL ,
 	name VARCHAR(20) NOT NULL,
 	nickname VARCHAR(20) NOT NULL,
 	birth DATE NOT NULL,
-	steam_id VARCHAR(30) NOT NULL,
+	steam_id VARCHAR(17) NOT NULL,
 	is_state TINYINT(1) NOT NULL DEFAULT 1
 );
 
