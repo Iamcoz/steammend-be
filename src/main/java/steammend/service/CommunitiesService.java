@@ -51,17 +51,29 @@ public class CommunitiesService {
 
 		return false;
 	}
-//	
-//	
-//	/** 전체 게시글을 10개씩 페이징 하여 조회
-//	 * 
-//	 * @param pageable
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public List<CommunitiesDTO> getAllCommunity(Pageable pageable) throws Exception{
-//		Page<Communities> commuAllPageEntity = commuDAO.findAll(pageable);
-//		List<Communities> commuAllEntity = commuAllPageEntity.getContent();
+	
+	
+	/** 전체 게시글을 10개씩 페이징 하여 조회
+	 * 
+	 * @param pageable
+	 * @return
+	 * @throws Exception
+	 */
+	public List<CommunitiesDTO> getAllCommunity(Pageable pageable) throws Exception{
+		Page<Communities> commuAllPageEntity = commuDAO.findAll(pageable);
+		List<Communities> commuAllEntity = commuAllPageEntity.getContent();
+		
+		if(commuAllEntity == null) {
+			throw new MessageException("존재하는 게시글이 없습니다.");
+		}
+		
+		List<CommunitiesDTO> commuAllDTO = Arrays.asList(mapper.map(commuAllEntity, CommunitiesDTO[].class));
+		
+		return commuAllDTO;
+	}
+	/* 전체 게시글 조회 */
+//	public List<CommunitiesDTO> getAllCommunity() throws Exception{
+//		List<Communities> commuAllEntity = commuDAO.findAll();
 //		
 //		if(commuAllEntity == null) {
 //			throw new MessageException("존재하는 게시글이 없습니다.");
@@ -71,19 +83,8 @@ public class CommunitiesService {
 //		
 //		return commuAllDTO;
 //	}
-//	/* 전체 게시글 조회 */
-////	public List<CommunitiesDTO> getAllCommunity() throws Exception{
-////		List<Communities> commuAllEntity = commuDAO.findAll();
-////		
-////		if(commuAllEntity == null) {
-////			throw new MessageException("존재하는 게시글이 없습니다.");
-////		}
-////		
-////		List<CommunitiesDTO> commuAllDTO = Arrays.asList(mapper.map(commuAllEntity, CommunitiesDTO[].class));
-////		
-////		return commuAllDTO;
-////	}
 
+	
 	/** 하나의 게시글 조회
 	 * 
 	 * @param id

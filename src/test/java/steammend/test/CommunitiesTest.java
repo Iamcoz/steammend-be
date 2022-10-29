@@ -36,18 +36,18 @@ public class CommunitiesTest {
 	}
 	
 	
-//	/* 전체 게시글을 10개씩 페이징 하여 조회 */
-//	@Test
-//	void allCommunity() {
-//		Pageable pagable = PageRequest.of(1, 10, Sort.Direction.DESC, "communityId");
-//
-//        try {
-//			commuService.getAllCommunity(pagable);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
+	/* 전체 게시글을 10개씩 페이징 하여 조회 */
+	@Test
+	void allCommunity() {
+		Pageable pagable = PageRequest.of(1, 10, Sort.Direction.DESC, "id");
+
+        try {
+			commuService.getAllCommunity(pagable);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 	
 	
 	/* 하나의 게시글 조회수 1씩 증가하며 조회 */

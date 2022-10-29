@@ -30,18 +30,18 @@ public class CommunitiesController {
 	}
 
 	
-//	/* 전체 게시글을 10개씩 페이징 하여 조회 */
+	/* 전체 게시글을 10개씩 페이징 하여 조회 */
+	@GetMapping("/allCommunity")
+	public List<CommunitiesDTO> allCommunity(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
+		return commuService.getAllCommunity(pageable);
+	}
+	/* 전체 게시글 조회 */
 //	@GetMapping("/allCommunity")
-//	public List<CommunitiesDTO> allCommunity(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
-//		return commuService.getAllCommunity(pageable);
+//	public List<CommunitiesDTO> allCommunity() throws Exception{
+//		return commuService.getAllCommunity();
 //	}
-//	/* 전체 게시글 조회 */
-////	@GetMapping("/allCommunity")
-////	public List<CommunitiesDTO> allCommunity() throws Exception{
-////		return commuService.getAllCommunity();
-////	}
-//	
-//	
+	
+	
 	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
 	@GetMapping("/community")
 	public CommunitiesDTO community(Long id) throws Exception {
