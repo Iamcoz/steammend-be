@@ -83,39 +83,39 @@ public class CommunitiesService {
 ////		
 ////		return commuAllDTO;
 ////	}
-//
-//	/** 하나의 게시글 조회
-//	 * 
-//	 * @param communityId
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public CommunitiesDTO getCommunity(Long communityId) throws Exception {
-//		
-//		Optional<Communities> commuEntity = commuDAO.findById(communityId);
-//		
-//		if(commuEntity.get() == null) {
-//			throw new MessageException("존재하지 않는 게시글입니다.");
-//		}
-//		
-//		CommunitiesDTO commuDTO = mapper.map(commuEntity.get(), CommunitiesDTO.class);
-//	
-//		
-//		return commuDTO;
-//	}
-//	
-//	
-//	/** 게시글 조회 시 조회수 1씩 증가
-//	 * 
-//	 * @param communityId
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	@Transactional
-//	public int modifyHit(Long communityId) throws Exception {
-//		return commuDAO.updateHitByCommunityId(communityId);
-//	}
-//	
+
+	/** 하나의 게시글 조회
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public CommunitiesDTO getCommunity(Long id) throws Exception {
+		
+		Optional<Communities> commuEntity = commuDAO.findById(id);
+		
+		if(commuEntity.get() == null) {
+			throw new MessageException("존재하지 않는 게시글입니다.");
+		}
+		
+		CommunitiesDTO commuDTO = mapper.map(commuEntity.get(), CommunitiesDTO.class);
+	
+		
+		return commuDTO;
+	}
+	
+	
+	/** 게시글 조회 시 조회수 1씩 증가
+	 * 
+	 * @param communityId
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public int modifyHit(Long id) throws Exception {
+		return commuDAO.updateHitByCommunityId(id);
+	}
+	
 //	
 //	/** 하나의 게시글 수정
 //	 * 

@@ -24,7 +24,7 @@ public class CommunitiesTest {
 	
 	
 	/* 하나의 게시글 등록 */
-	@Test
+//	@Test
 	void addCommunity() {
 		CommunitiesDTO commuDTO = new CommunitiesDTO("coz", "말머리", "제목", "내용");
 		
@@ -34,10 +34,10 @@ public class CommunitiesTest {
 			e.printStackTrace();
 		}
 	}
-//	
-//	
+	
+	
 //	/* 전체 게시글을 10개씩 페이징 하여 조회 */
-////	@Test
+//	@Test
 //	void allCommunity() {
 //		Pageable pagable = PageRequest.of(1, 10, Sort.Direction.DESC, "communityId");
 //
@@ -48,22 +48,22 @@ public class CommunitiesTest {
 //		}
 //
 //	}
-//	
-//	
-//	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
-////	@Test
-//	void community() {
-//		Long communityId = 15L;
-//		
-//		try {
-//			commuService.modifyHit(communityId);
-//			commuService.getCommunity(communityId);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	
+	
+	
+	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
+//	@Test
+	void community() {
+		Long id = 2L;
+		
+		try {
+			commuService.modifyHit(id);
+			commuService.getCommunity(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 //	/* 하나의 게시글 수정 */
 //	@Test
 //	void modifyCommunity() {

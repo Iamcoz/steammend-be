@@ -42,12 +42,12 @@ public class CommunitiesController {
 ////	}
 //	
 //	
-//	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
-//	@GetMapping("/community")
-//	public CommunitiesDTO community(Long id) throws Exception {
-//		commuService.modifyHit(id);
-//		return commuService.getCommunity(id);
-//	}
+	/* 하나의 게시글 조회수 1씩 증가하며 조회 */
+	@GetMapping("/community")
+	public CommunitiesDTO community(Long id) throws Exception {
+		commuService.modifyHit(id);
+		return commuService.getCommunity(id);
+	}
 //	
 //	
 //	/* 하나의 게시글 수정 */
