@@ -15,6 +15,12 @@
 	<form action="userlogout.do" method="post">
 		<input type="submit" value="로그아웃">
 	</form>
+	
+	<br><br><br>
+	<form action="userlogincheck.do" method="post">
+		<input type="submit" value="login check">
+	</form>
+	
 
 </body>
 </html>

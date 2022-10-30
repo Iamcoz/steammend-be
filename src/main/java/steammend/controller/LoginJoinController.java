@@ -19,13 +19,10 @@ public class LoginJoinController {
 	private final MemberService MemberService;
 	private final MemberServiceImpl MemberServiceImpl;
 	
-	
-	
 	@GetMapping("/")
 	public String index() {
 		return "redirect:/login.html";
 	}
-	
 	
 	/*
 	 * 초기화면에서 로그인 선택
@@ -37,7 +34,6 @@ public class LoginJoinController {
 	
 	/*
      * 초기화면에서 회원가입 선택
-     * 
      */
     @RequestMapping(value="/userjoin.do")
     public String insert() {
@@ -63,8 +59,6 @@ public class LoginJoinController {
 		String id = request.getParameter("bm_id");
 		String pw = request.getParameter("bm_pw");
 		
-		
-		
 		if(MemberServiceImpl.checkLogin(id, pw) != null) {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
 			MembersDTO dto = new MembersDTO(res.getId(), res.getSteamId());
@@ -75,9 +69,7 @@ public class LoginJoinController {
 		else {
 			return "fail";
 		}
-		
     }
-    
 	
 	/*
 	 * 	@logic : logout, session 초기화
@@ -93,8 +85,6 @@ public class LoginJoinController {
     	return "logout";
     }
     
-    
-    
     /*
      * 	@parameter : id, pw
      * 	
@@ -102,8 +92,6 @@ public class LoginJoinController {
      * 
      * 	@return : sql insert 성공하면 succ
      * 				실패하면 fail
-     * 
-     * 
      */
     @RequestMapping(value="/join.do")
 	public String userJoin(HttpServletRequest request) {
@@ -124,10 +112,16 @@ public class LoginJoinController {
 			session.setAttribute("dto", dto);
 			System.out.println("session 출력 : "+session.getAttribute("dto"));
 			
-			
 			return "succ";
 		}catch(Exception e){
 			return "fail";
 		}
     }
+    
+    @RequestMapping(value="/userlogincheck.do")
+    public String userLoginCheck(HttpSession session) {
+  
+    	return "logincheck";
+    }
+    
 }
