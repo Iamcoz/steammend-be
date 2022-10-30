@@ -37,10 +37,16 @@ public class MembersDTO {
 				build();
 	}
 	
-	public MembersDTO(String id, String password) {
+//	public MembersDTO(String id, String password) {
+//		super();
+//		this.id = id;
+//		this.password = password;
+//	}
+	
+	public MembersDTO(String id, String steamId) {
 		super();
 		this.id = id;
-		this.password = password;
+		this.steamId = steamId;
 	}
 
 	public MembersDTO(String id, String password, String name, String nickname, String birth, String steamId) {

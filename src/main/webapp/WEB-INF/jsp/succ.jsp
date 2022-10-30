@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> ${res.id}</h1> <h3>님 로그인!!!!!!!!</h3>
+	<h1> ${dto.getId()}</h1> <h3>님 로그인!!!!!!!!</h3>
+	<h3> steamId : </h3><h1> ${dto.getSteamId()}</h1> 
 	
 	
 	

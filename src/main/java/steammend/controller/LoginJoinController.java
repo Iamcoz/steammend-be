@@ -62,14 +62,14 @@ public class LoginJoinController {
 		
 		String id = request.getParameter("bm_id");
 		String pw = request.getParameter("bm_pw");
-		MembersDTO dto = new MembersDTO(id,pw);
 		
 		
 		
 		if(MemberServiceImpl.checkLogin(id, pw) != null) {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
-			session.setAttribute(res.getId(), res.getId());
-			System.out.println("session 출력 : "+session.getAttribute(res.getId()));
+			MembersDTO dto = new MembersDTO(res.getId(), res.getSteamId());
+			session.setAttribute("dto", dto);
+			System.out.println("session 출력 : "+session.getAttribute("dto"));
 			return "succ";
 		}
 		else {
@@ -116,12 +116,15 @@ public class LoginJoinController {
 		String birth = request.getParameter("birth");
 		String steamId = request.getParameter("steam_id");
 		boolean isDeleted = false;
-		MembersDTO dto = new MembersDTO(id, pw, name, nickName, birth, steamId);
+		MembersDTO res = new MembersDTO(id, pw, name, nickName, birth, steamId);
 		
 		try {
-			MemberService.insert(dto);
-			session.setAttribute(dto.getId(), dto.getId());
-			System.out.println("session 출력 : "+session.getAttribute(dto.getId()));
+			MemberService.insert(res);
+			MembersDTO dto = new MembersDTO(res.getId(), res.getSteamId());
+			session.setAttribute("dto", dto);
+			System.out.println("session 출력 : "+session.getAttribute("dto"));
+			
+			
 			return "succ";
 		}catch(Exception e){
 			return "fail";
