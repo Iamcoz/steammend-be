@@ -31,7 +31,6 @@ public class AttachmentsDTO {
 	
 	public Attachments toEntity() {
 		return 	Attachments.builder().
-//				attachmentId(attachmentId).
 				communityId(communityId).
 				path(path).
 				build();

@@ -1,5 +1,7 @@
 package steammend.test;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +39,7 @@ public class CommunitiesTest {
 	
 	
 	/* 전체 게시글을 10개씩 페이징 하여 조회 */
-	@Test
+//	@Test
 	void allCommunity() {
 		Pageable pagable = PageRequest.of(1, 10, Sort.Direction.DESC, "id");
 
@@ -64,21 +66,22 @@ public class CommunitiesTest {
 	}
 	
 	
-//	/* 하나의 게시글 수정 */
-//	@Test
-//	void modifyCommunity() {
-//		Long communityId = 17L;
-//		String header = "수정 말머리";
-//		String title = "수정 제목";
-//		String content = "수정 내용";
-//		String memberId = "coz";
-//		
-//		try {
-//			commuService.modifyCommunity(communityId, header, title, content, memberId);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	/* 하나의 게시글 수정 */
+	@Test
+	void modifyCommunity() {
+		Long id = 3L;
+		String header = "수정 말머리";
+		String title = "수정 제목";
+		String content = "수정 내용";
+		LocalDateTime updatedAt = LocalDateTime.now();
+		String memberId = "coz";
+		
+		try {
+			commuService.modifyCommunity(id, header, title, content, updatedAt, memberId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 //	
 //	
 //	/* 하나의 게시글 삭제(수정) */

@@ -1,5 +1,6 @@
 package steammend.service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -117,32 +118,32 @@ public class CommunitiesService {
 		return commuDAO.updateHitByCommunityId(id);
 	}
 	
-//	
-//	/** 하나의 게시글 수정
-//	 * 
-//	 * @param communityId
-//	 * @param header
-//	 * @param title
-//	 * @param content
-//	 * @param memberId
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	@Transactional
-//	public boolean modifyCommunity(Long communityId, String header, String title, String content, String memberId/*session*/) throws Exception {
-//		CommunitiesDTO commuDTO = getCommunity(communityId);
-//		
-//		int result = 0;
-//		
-//		if(communityId != 0 && commuDTO.getMemberId() != null) { // 임시코드
-////		if(communityId != 0 && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
-//			result = commuDAO.updateCommunityByCommunityId(communityId, header, title, content, memberId);
-//		} else if (result == 0) {
-//			throw new MessageException("게시글 수정 실패");
-//		}
-//		return true;
-//	}
-//	
+	
+	/** 하나의 게시글 수정
+	 * 
+	 * @param id
+	 * @param header
+	 * @param title
+	 * @param content
+	 * @param memberId
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean modifyCommunity(Long id, String header, String title, String content, LocalDateTime updatedAt, String memberId/*session*/) throws Exception {
+		CommunitiesDTO commuDTO = getCommunity(id);
+		
+		int result = 0;
+		
+		if(id != 0 && commuDTO.getMemberId() != null) { // 임시코드
+//		if(communityId != 0 && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
+			result = commuDAO.updateCommunityByCommunityId(id, header, title, content, updatedAt, memberId);
+		} else if (result == 0) {
+			throw new MessageException("게시글 수정 실패");
+		}
+		return true;
+	}
+	
 //	
 //	/** 하나의 게시글 삭제(수정)
 //	 * 

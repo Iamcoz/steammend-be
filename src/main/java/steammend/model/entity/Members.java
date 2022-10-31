@@ -7,6 +7,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
@@ -24,9 +25,9 @@ import lombok.ToString;
 @Builder
 @ToString
 
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Members {
+@EntityListeners(AuditingEntityListener.class)
+public class Members {// extends Base {
 	
 	@Id
 	private String id;
@@ -49,8 +50,10 @@ public class Members {
 	@CreatedDate
 	private LocalDateTime createdAt;
 	
-	@CreatedDate
+	@LastModifiedDate
 	private LocalDateTime updatedAt;
 
 	private boolean isDeleted;
+	
+
 }

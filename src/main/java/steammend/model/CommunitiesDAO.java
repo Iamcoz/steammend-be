@@ -1,5 +1,7 @@
 package steammend.model;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,10 +16,10 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 	@Query("UPDATE Communities c SET c.hit = c.hit+1 WHERE c.id = :id ")
 	int updateHitByCommunityId(Long id);
 	
-//	@Modifying(clearAutomatically = true)
-//	@Query("UPDATE Communities c SET c.header = :header, c.title = :title, c.content = :content WHERE c.communityId = :communityId AND c.memberId = :memberId")
-//	int updateCommunityByCommunityId(Long communityId, String header, String title, String content, String memberId);
-//
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Communities c SET c.header = :header, c.title = :title, c.content = :content, c.updatedAt = :updatedAt WHERE c.id = :id AND c.memberId = :memberId")
+	int updateCommunityByCommunityId(Long id, String header, String title, String content, LocalDateTime updatedAt, String memberId);
+
 //	@Modifying(clearAutomatically = true)
 //	@Query("UPDATE Communities c SET c.isState = 0 WHERE c.communityId = :communityId")
 //	int deleteCommunityByCommunityId(Long communityId);

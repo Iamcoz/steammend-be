@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 
-@EnableJpaAuditing
 //@EnableConfigurationProperties({AttachmentsDTO.class})
 
+@EnableJpaAuditing
 @SpringBootApplication
 public class SteammendBeApplication {
 

@@ -1,5 +1,6 @@
 package steammend.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,20 +49,21 @@ public class CommunitiesController {
 		commuService.modifyHit(id);
 		return commuService.getCommunity(id);
 	}
-//	
-//	
-//	/* 하나의 게시글 수정 */
-//	@PostMapping("/modify")
-//	public boolean modifyCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-//		return	commuService.modifyCommunity(commuDTO.getId(), 
-//											commuDTO.getHeader(), 
-//											commuDTO.getTitle(), 
-//											commuDTO.getContent(),
-//											commuDTO.getMemberId());
-//		
-//	}
-//	
-//	
+	
+	
+	/* 하나의 게시글 수정 */
+	@PostMapping("/modify")
+	public boolean modifyCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+		return	commuService.modifyCommunity(commuDTO.getId(), 
+											commuDTO.getHeader(), 
+											commuDTO.getTitle(), 
+											commuDTO.getContent(),
+											LocalDateTime.now(),
+											commuDTO.getMemberId());
+		
+	}
+	
+	
 //	/* 하나의 게시글 삭제 */
 //	@PostMapping("/delete")
 //	public boolean deleteCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
