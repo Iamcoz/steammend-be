@@ -5,10 +5,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import steammend.model.dto.MembersDTO;
+import steammend.model.dto.SessionDTO;
 import steammend.service.MemberService;
 import steammend.service.MemberServiceImpl;
 
@@ -41,18 +44,16 @@ public class LoginJoinController {
 	}
 	
 	/*
-	 * @logic : login 가능한지 판단
-	 * 
 	 * @parameter : id, pw
 	 * 
-	 * @return : 존재하는 회원인 경우 succ
-	 * 				아닌 경우 fail 
-	 *
-	 *		succ : 성공 화면
-	 *		fail : 실패 화면
+	 * @logic : login 가능한지 판단
+	 * 
+	 * @return : 존재하는 회원 있는 경우 해당 회원 sessionDTO 객체(dto)
+	 * 				없는 경우 null
 	 */
 	@RequestMapping(value="/userlogin.do")
-	public String userLogin(HttpServletRequest request) {
+	@ResponseBody
+	public SessionDTO userLogin(HttpServletRequest request) {
     	
 		HttpSession session = request.getSession();
 		
@@ -61,13 +62,13 @@ public class LoginJoinController {
 		
 		if(MemberServiceImpl.checkLogin(id, pw) != null) {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
-			MembersDTO dto = new MembersDTO(res.getId(), res.getSteamId());
-			session.setAttribute("dto", dto);
-			System.out.println("session 출력 : "+session.getAttribute("dto"));
-			return "succ";
+			SessionDTO dto = new SessionDTO(res.getId(), res.getSteamId());
+			session.setAttribute(dto.getMemberId(), dto.getSteamId());
+//			System.out.println("출력 ============="+session.getAttribute(dto.getId()));
+			return dto;
 		}
 		else {
-			return "fail";
+			return null;
 		}
     }
 	
@@ -75,14 +76,14 @@ public class LoginJoinController {
 	 * 	@logic : logout, session 초기화
 	 * 	
 	 * 	@return : logout 확인 page
-	 * 				session 초기화되어 님 앞에 id 안뜸
 	 */
     @RequestMapping(value="/userlogout.do")
+    @ResponseBody
     public String userLogout(HttpSession session) {
     	
     	session.invalidate();
   
-    	return "logout";
+    	return "logout success";
     }
     
     /*
@@ -90,11 +91,11 @@ public class LoginJoinController {
      * 	
      * 	@logic : id 중복 확인
      * 
-     * 	@return : sql insert 성공하면 succ
-     * 				실패하면 fail
+     * 	@return : sql insert 성공하면 sessionDTO 객체(dto), 실패 null
      */
     @RequestMapping(value="/join.do")
-	public String userJoin(HttpServletRequest request) {
+    @ResponseBody
+	public SessionDTO userJoin(HttpServletRequest request) {
 		
     	HttpSession session = request.getSession();
 		String id = request.getParameter("id");
@@ -103,25 +104,15 @@ public class LoginJoinController {
 		String nickName = request.getParameter("nickname");
 		String birth = request.getParameter("birth");
 		String steamId = request.getParameter("steam_id");
-		boolean isDeleted = false;
 		MembersDTO res = new MembersDTO(id, pw, name, nickName, birth, steamId);
 		
 		try {
 			MemberService.insert(res);
-			MembersDTO dto = new MembersDTO(res.getId(), res.getSteamId());
+			SessionDTO dto = new SessionDTO(res.getId(), res.getSteamId());
 			session.setAttribute("dto", dto);
-			System.out.println("session 출력 : "+session.getAttribute("dto"));
-			
-			return "succ";
+			return dto;
 		}catch(Exception e){
-			return "fail";
+			return null;
 		}
     }
-    
-    @RequestMapping(value="/userlogincheck.do")
-    public String userLoginCheck(HttpSession session) {
-  
-    	return "logincheck";
-    }
-    
 }
