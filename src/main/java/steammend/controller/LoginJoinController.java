@@ -109,7 +109,7 @@ public class LoginJoinController {
 		try {
 			MemberService.insert(res);
 			SessionDTO dto = new SessionDTO(res.getId(), res.getSteamId());
-			session.setAttribute("dto", dto);
+			session.setAttribute(dto.getMemberId(), dto.getSteamId());
 			return dto;
 		}catch(Exception e){
 			return null;
