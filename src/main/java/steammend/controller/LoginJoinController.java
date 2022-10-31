@@ -5,13 +5,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import steammend.model.dto.MembersDTO;
-import steammend.model.dto.SessionDTO;
 import steammend.service.MemberService;
 import steammend.service.MemberServiceImpl;
 
@@ -48,24 +47,21 @@ public class LoginJoinController {
 	 * 
 	 * @logic : login 가능한지 판단
 	 * 
-	 * @return : 존재하는 회원 있는 경우 해당 회원 sessionDTO 객체(dto)
-	 * 				없는 경우 null
+	 * @return : 존재하는 회원 있는 경우 해당 회원 id , 없는 경우 null
 	 */
 	@RequestMapping(value="/userlogin.do")
 	@ResponseBody
-	public SessionDTO userLogin(HttpServletRequest request) {
-    	
-		HttpSession session = request.getSession();
+	public String userLogin(HttpServletRequest request) {
 		
 		String id = request.getParameter("bm_id");
 		String pw = request.getParameter("bm_pw");
 		
 		if(MemberServiceImpl.checkLogin(id, pw) != null) {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
-			SessionDTO dto = new SessionDTO(res.getId(), res.getSteamId());
-			session.setAttribute(dto.getMemberId(), dto.getSteamId());
-//			System.out.println("출력 ============="+session.getAttribute(dto.getId()));
-			return dto;
+			
+			HttpSession session = request.getSession();
+			session.setAttribute(res.getId(), res.getSteamId());
+			return res.getId();
 		}
 		else {
 			return null;
@@ -73,17 +69,19 @@ public class LoginJoinController {
     }
 	
 	/*
-	 * 	@logic : logout, session 초기화
+	 * 	@parameter : member id	
+	 * 
+	 * 	@logic : 해당 id logout(세션 삭제)
 	 * 	
-	 * 	@return : logout 확인 page
+	 * 	@return : 실행하면 true
 	 */
     @RequestMapping(value="/userlogout.do")
     @ResponseBody
-    public String userLogout(HttpSession session) {
+    public boolean userLogout(@RequestParam("id") String id, HttpSession session) {
     	
-    	session.invalidate();
-  
-    	return "logout success";
+    	session.removeAttribute(id);
+    	
+    	return true;
     }
     
     /*
@@ -91,13 +89,12 @@ public class LoginJoinController {
      * 	
      * 	@logic : id 중복 확인
      * 
-     * 	@return : sql insert 성공하면 sessionDTO 객체(dto), 실패 null
+     * 	@return : sql insert 성공하면 회원 id, 실패 null 
      */
     @RequestMapping(value="/join.do")
     @ResponseBody
-	public SessionDTO userJoin(HttpServletRequest request) {
-		
-    	HttpSession session = request.getSession();
+	public String userJoin(HttpServletRequest request) {
+    	
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
@@ -108,9 +105,9 @@ public class LoginJoinController {
 		
 		try {
 			MemberService.insert(res);
-			SessionDTO dto = new SessionDTO(res.getId(), res.getSteamId());
-			session.setAttribute(dto.getMemberId(), dto.getSteamId());
-			return dto;
+			HttpSession session = request.getSession();
+			session.setAttribute(res.getId(), res.getSteamId());
+			return res.getId();
 		}catch(Exception e){
 			return null;
 		}
