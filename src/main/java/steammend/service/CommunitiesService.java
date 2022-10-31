@@ -144,27 +144,27 @@ public class CommunitiesService {
 		return true;
 	}
 	
-//	
-//	/** 하나의 게시글 삭제(수정)
-//	 * 
-//	 * @param communityId
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	@Transactional
-//	public boolean deleteCommunity(Long communityId) throws Exception {
-//		CommunitiesDTO commuDTO = getCommunity(communityId);
-//		
-//		int result = 0;
-//		
-//		if(communityId != 0 && commuDTO.isDeleted() == false && commuDTO.getMemberId() != null) { // 임시코드
-////		if(communityId != 0 && commuDTO.isState() == true && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
-//			result = commuDAO.deleteCommunityByCommunityId(communityId);
-//		} else if(result == 0) {
-//			throw new MessageException("게시글 삭제 실패");
-//		}
-//		return true;
-//	}
+	
+	/** 하나의 게시글 삭제(수정)
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean deleteCommunity(Long id, LocalDateTime updatedAt) throws Exception {
+		CommunitiesDTO commuDTO = getCommunity(id);
+		
+		int result = 0;
+		
+		if(id != 0 && commuDTO.isDeleted() == false && commuDTO.getMemberId() != null) { // 임시코드
+//		if(communityId != 0 && commuDTO.isState() == true && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
+			result = commuDAO.deleteCommunityByCommunityId(id, updatedAt);
+		} else if(result == 0) {
+			throw new MessageException("게시글 삭제 실패");
+		}
+		return true;
+	}
 //
 //	
 //	

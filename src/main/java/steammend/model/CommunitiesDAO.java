@@ -20,7 +20,7 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 	@Query("UPDATE Communities c SET c.header = :header, c.title = :title, c.content = :content, c.updatedAt = :updatedAt WHERE c.id = :id AND c.memberId = :memberId")
 	int updateCommunityByCommunityId(Long id, String header, String title, String content, LocalDateTime updatedAt, String memberId);
 
-//	@Modifying(clearAutomatically = true)
-//	@Query("UPDATE Communities c SET c.isState = 0 WHERE c.communityId = :communityId")
-//	int deleteCommunityByCommunityId(Long communityId);
+	@Modifying(clearAutomatically = true)
+	@Query(value = "UPDATE Communities c SET c.is_deleted = 1, c.updated_at = :updatedAt WHERE c.id = :id", nativeQuery = true)
+	int deleteCommunityByCommunityId(Long id, LocalDateTime updatedAt);
 }

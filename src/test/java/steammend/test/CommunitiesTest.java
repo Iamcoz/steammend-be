@@ -26,7 +26,7 @@ public class CommunitiesTest {
 	
 	
 	/* 하나의 게시글 등록 */
-//	@Test
+	@Test
 	void addCommunity() {
 		CommunitiesDTO commuDTO = new CommunitiesDTO("coz", "말머리", "제목", "내용");
 		
@@ -67,7 +67,7 @@ public class CommunitiesTest {
 	
 	
 	/* 하나의 게시글 수정 */
-	@Test
+//	@Test
 	void modifyCommunity() {
 		Long id = 3L;
 		String header = "수정 말머리";
@@ -82,19 +82,20 @@ public class CommunitiesTest {
 			e.printStackTrace();
 		}
 	}
-//	
-//	
-//	/* 하나의 게시글 삭제(수정) */
-////	@Test
-//	void deleteCommunity() {
-//		Long communityId = 18L;
-//		
-//		try {
-//			commuService.deleteCommunity(communityId);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	
+	
+	/* 하나의 게시글 삭제(수정) */
+//	@Test
+	void deleteCommunity() {
+		Long id = 5L;
+		LocalDateTime updatedAt = LocalDateTime.now();
+		
+		try {
+			commuService.deleteCommunity(id, updatedAt);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }
