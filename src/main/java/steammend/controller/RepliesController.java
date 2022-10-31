@@ -1,7 +1,5 @@
 package steammend.controller;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +37,6 @@ public class RepliesController {
 	public boolean modifyReply(@RequestBody RepliesDTO replyDTO) throws Exception {
 		return replyService.modifyReply(replyDTO.getId(),
 										replyDTO.getContent(),
-										LocalDateTime.now(),
 										replyDTO.getMemberId());
 	}
 	

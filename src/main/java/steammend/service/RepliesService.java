@@ -74,14 +74,14 @@ public class RepliesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean modifyReply(Long replyId, String content, LocalDateTime updatedAt, String memberId/*session*/) throws Exception {
+	public boolean modifyReply(Long replyId, String content, String memberId/*session*/) throws Exception {
 		RepliesDTO replyDTO = getReply(replyId);
 		
 		int result = 0;
 		
 		if(replyId != 0 && replyDTO.getMemberId() != null) {  // 임시코드
 //		if(replyId != 0 && replyDTO.getMemberId() == 세션id값) {  // 수정 방향 코드
-			result = replyDAO.updateReplyContentByReplyId(replyId, content, updatedAt, memberId);
+			result = replyDAO.updateReplyContentByReplyId(replyId, content, LocalDateTime.now(), memberId);
 		} else if (result == 0) {
 			throw new MessageException("댓글 수정 실패");
 		}

@@ -1,7 +1,5 @@
 package steammend.test;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -51,13 +49,12 @@ public class RepliesTest {
 	/* 하나의 댓글 수정 */
 //	@Test
 	void modifyReply() {
-		Long id = 2L;
+		Long id = 3L;
 		String content = "내 수정 용";
-		LocalDateTime updatedAt = LocalDateTime.now();
 		String memberId = "coz";
 		
 		try {
-			replyService.modifyReply(id, content, updatedAt, memberId);
+			replyService.modifyReply(id, content, memberId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,7 +62,7 @@ public class RepliesTest {
 	
 	
 	/* 하나의 댓글 삭제(수정) */
-	@Test
+//	@Test
 	void deleteReply() {
 		Long id = 2L;
 		
