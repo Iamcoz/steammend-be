@@ -1,7 +1,5 @@
 package steammend.test;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +24,7 @@ public class CommunitiesTest {
 	
 	
 	/* 하나의 게시글 등록 */
-	@Test
+//	@Test
 	void addCommunity() {
 		CommunitiesDTO commuDTO = new CommunitiesDTO("coz", "말머리", "제목", "내용");
 		
@@ -69,15 +67,14 @@ public class CommunitiesTest {
 	/* 하나의 게시글 수정 */
 //	@Test
 	void modifyCommunity() {
-		Long id = 3L;
+		Long id = 10L;
 		String header = "수정 말머리";
 		String title = "수정 제목";
 		String content = "수정 내용";
-		LocalDateTime updatedAt = LocalDateTime.now();
 		String memberId = "coz";
 		
 		try {
-			commuService.modifyCommunity(id, header, title, content, updatedAt, memberId);
+			commuService.modifyCommunity(id, header, title, content, memberId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,13 +82,12 @@ public class CommunitiesTest {
 	
 	
 	/* 하나의 게시글 삭제(수정) */
-//	@Test
+	@Test
 	void deleteCommunity() {
-		Long id = 5L;
-		LocalDateTime updatedAt = LocalDateTime.now();
+		Long id = 10L;
 		
 		try {
-			commuService.deleteCommunity(id, updatedAt);
+			commuService.deleteCommunity(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

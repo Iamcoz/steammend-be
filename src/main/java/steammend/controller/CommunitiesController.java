@@ -1,6 +1,5 @@
 package steammend.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,6 @@ public class CommunitiesController {
 											commuDTO.getHeader(), 
 											commuDTO.getTitle(), 
 											commuDTO.getContent(),
-											LocalDateTime.now(),
 											commuDTO.getMemberId());
 		
 	}

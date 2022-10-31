@@ -130,14 +130,14 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean modifyCommunity(Long id, String header, String title, String content, LocalDateTime updatedAt, String memberId/*session*/) throws Exception {
+	public boolean modifyCommunity(Long id, String header, String title, String content, String memberId/*session*/) throws Exception {
 		CommunitiesDTO commuDTO = getCommunity(id);
 		
 		int result = 0;
 		
 		if(id != 0 && commuDTO.getMemberId() != null) { // 임시코드
 //		if(communityId != 0 && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
-			result = commuDAO.updateCommunityByCommunityId(id, header, title, content, updatedAt, memberId);
+			result = commuDAO.updateCommunityByCommunityId(id, header, title, content, LocalDateTime.now(), memberId);
 		} else if (result == 0) {
 			throw new MessageException("게시글 수정 실패");
 		}
