@@ -1,5 +1,7 @@
 package steammend.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,33 +20,34 @@ public class RepliesController {
 	private RepliesService replyService;
 	
 	
-//	/* 하나의 댓글 작성 */
-//	@PostMapping("/add")
-//	public boolean addReply(@RequestBody RepliesDTO replyDTO) throws Exception {
-//		return replyService.addReply(replyDTO);
-//	}
-//	
-//	
-//	/* 하나의 댓글 조회 */
-//	@GetMapping("/reply")
-//	public RepliesDTO reply(Long id) throws Exception {
-//		return replyService.getReply(id);
-//	}
-//	
-//	
-//	/* 하나의 게시글 수정 */
-//	@PostMapping("/modify")
-//	public boolean modifyReply(@RequestBody RepliesDTO replyDTO) throws Exception {
-//		return replyService.modifyReply(replyDTO.getId(),
-//										replyDTO.getContent(),
-//										replyDTO.getMemberId());
-//	}
-//	
-//	
-//	/* 하나의 게시글 삭제 */
-//	@PostMapping("/delete")
-//	public boolean deleteReply(@RequestBody RepliesDTO replyDTO) throws Exception {
-//		return replyService.deleteReply(replyDTO.getId());
-//	}
+	/* 하나의 댓글 작성 */
+	@PostMapping("/add")
+	public boolean addReply(@RequestBody RepliesDTO replyDTO) throws Exception {
+		return replyService.addReply(replyDTO);
+	}
+	
+	
+	/* 하나의 댓글 조회 */
+	@GetMapping("/reply")
+	public RepliesDTO reply(Long id) throws Exception {
+		return replyService.getReply(id);
+	}
+	
+	
+	/* 하나의 게시글 수정 */
+	@PostMapping("/modify")
+	public boolean modifyReply(@RequestBody RepliesDTO replyDTO) throws Exception {
+		return replyService.modifyReply(replyDTO.getId(),
+										replyDTO.getContent(),
+										LocalDateTime.now(),
+										replyDTO.getMemberId());
+	}
+	
+	
+	/* 하나의 게시글 삭제 */
+	@PostMapping("/delete")
+	public boolean deleteReply(@RequestBody RepliesDTO replyDTO) throws Exception {
+		return replyService.deleteReply(replyDTO.getId());
+	}
 	
 }

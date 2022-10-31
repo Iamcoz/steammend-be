@@ -152,14 +152,14 @@ public class CommunitiesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean deleteCommunity(Long id, LocalDateTime updatedAt) throws Exception {
+	public boolean deleteCommunity(Long id) throws Exception {
 		CommunitiesDTO commuDTO = getCommunity(id);
 		
 		int result = 0;
 		
 		if(id != 0 && commuDTO.isDeleted() == false && commuDTO.getMemberId() != null) { // 임시코드
 //		if(communityId != 0 && commuDTO.isState() == true && commuDTO.getMemberId() == 세션id값) { // 이 방식으로 수정
-			result = commuDAO.deleteCommunityByCommunityId(id, updatedAt);
+			result = commuDAO.deleteCommunityByCommunityId(id, LocalDateTime.now());
 		} else if(result == 0) {
 			throw new MessageException("게시글 삭제 실패");
 		}

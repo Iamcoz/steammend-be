@@ -67,7 +67,7 @@ public class CommunitiesController {
 	/* 하나의 게시글 삭제 */
 	@PostMapping("/delete")
 	public boolean deleteCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-		return commuService.deleteCommunity(commuDTO.getId(), LocalDateTime.now());
+		return commuService.deleteCommunity(commuDTO.getId());
 	}
 	
 	
