@@ -7,7 +7,7 @@
 
 ## redis handling
 - redis pw 설정 : redis.windows, redis.windows-service.conf file에서 requiredpass 비밀번호 자유롭게 설정
-- redis pw 참고 url : https://xn--lg3bu39b.xn--mk1bu44c/96
+- redis pw 참고 url : https://dilige-et-fac-quod-vis.tistory.com/5
 
 ### 실행
 ![zza](https://user-images.githubusercontent.com/96014470/199173626-4c2c392e-6d0c-498e-bbee-5ea2f352728b.PNG)<br>
