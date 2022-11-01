@@ -48,11 +48,6 @@ public class MemberServiceImpl implements MemberService{
         return join; 
     }
 	
-	
-	/*
-	 * 	@logic  row 비밀번호, 암호화 비밀번호 비교
-	 * 	
-	 */
 	public MembersDTO checkLogin(String id, String rawPw){
 		MembersDTO dto = memberMapper.findById(id);
 		if(dto == null) {
