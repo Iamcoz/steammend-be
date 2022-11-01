@@ -29,8 +29,8 @@
 				<td><input type="text" name="nickname"></td>
 			</tr>
 			<tr>
-				<th> BIRTH </th>
-				<td><input type="text" name="birth"></td>
+				<th> BIRTHDAY </th>
+				<td><input type="text" name="birthday"></td>
 			</tr>
 			<tr>
 				<th> STEAM ID </th>

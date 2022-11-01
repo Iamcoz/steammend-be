@@ -19,7 +19,7 @@ public class MembersDTO {
 	private String password;
 	private String name;
 	private String nickname;
-	private String birth;
+	private String birthday;
 	private String steamId;
 	private String createdAt;
 	private String updatedAt;
@@ -31,7 +31,7 @@ public class MembersDTO {
 				password(password).
 				name(name).
 				nickname(nickname).
-				birth(birth).
+				birthday(birthday).
 				steamId(steamId).
 				isDeleted(isDeleted).
 				build();
@@ -55,7 +55,7 @@ public class MembersDTO {
 		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
-		this.birth = birth;
+		this.birthday = birth;
 		this.steamId = steamId;
 	}
 	
