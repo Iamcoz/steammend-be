@@ -20,28 +20,28 @@ public class LoginJoinController {
 	
 	private final MemberService MemberService;
 	private final MemberServiceImpl MemberServiceImpl;
-	
-	@GetMapping("/")
-	public String index() {
-		return "redirect:/login.html";
-	}
-	
-	/*
-	 * 초기화면에서 로그인 선택
-	 */
-	@RequestMapping("/login.do")
-	public String login() {
-		return "login";
-	}
-	
-	/*
-     * 초기화면에서 회원가입 선택
+    
+    /*
+     * 	@parameter : 회원 가입하고자 하는 id
+     * 
+     * 	@return : login 가능 유무
      */
-    @RequestMapping(value="/userjoin.do")
-    public String insert() {
-		return "userjoin";
+    @RequestMapping(value="/idcheck.do")
+    @ResponseBody
+    public String idCheck(HttpServletRequest request) {
+    	
+    	String id = request.getParameter("check_id");
+    	MembersDTO res = MemberService.findById(id);
+    	
+    	if(res != null) {
+    		return "가입 불가";
+    	}
+    	else {
+    		return "가입 가능";
+    	}
 	}
-	
+    
+    
 	/*
 	 * @parameter : id, pw
 	 * 
@@ -53,9 +53,9 @@ public class LoginJoinController {
 	@ResponseBody
 	public String userLogin(HttpServletRequest request) {
 		
-		String id = request.getParameter("bm_id");
-		String pw = request.getParameter("bm_pw");
-		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+	
 		if(MemberServiceImpl.checkLogin(id, pw) != null) {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
 			
@@ -77,11 +77,11 @@ public class LoginJoinController {
 	 */
     @RequestMapping(value="/userlogout.do")
     @ResponseBody
-    public boolean userLogout(@RequestParam("id") String id, HttpSession session) {
+    public String userLogout(@RequestParam("id") String id, HttpSession session) {
     	
     	session.removeAttribute(id);
+    	return "logout";
     	
-    	return true;
     }
     
     /*
