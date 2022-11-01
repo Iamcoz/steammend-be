@@ -1,5 +1,8 @@
 package steammend.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -47,11 +50,12 @@ public class LoginJoinController {
 	 * 
 	 * @logic : login 가능한지 판단
 	 * 
-	 * @return : 존재하는 회원 있는 경우 해당 회원 id , 없는 경우 null
+	 * @return : 존재하는 회원 있는 경우 list(회원 id, session id)
+	 * 						없는 경우 null
 	 */
 	@RequestMapping(value="/userlogin.do")
 	@ResponseBody
-	public String userLogin(HttpServletRequest request) {
+	public List userLogin(HttpServletRequest request) {
 		
 		String id = request.getParameter("bm_id");
 		String pw = request.getParameter("bm_pw");
@@ -61,7 +65,12 @@ public class LoginJoinController {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute(res.getId(), res.getSteamId());
-			return res.getId();
+			System.out.println(session.getId());
+			List<String> list = new ArrayList<>();
+			list.add(res.getId());
+			list.add(session.getId());
+			System.out.println(list.toString());
+			return list;
 		}
 		else {
 			return null;
@@ -89,11 +98,12 @@ public class LoginJoinController {
      * 	
      * 	@logic : id 중복 확인
      * 
-     * 	@return : sql insert 성공하면 회원 id, 실패 null 
+     * 	@return : sql insert 성공하면 list(회원 id, session id)  
+     * 							실패 null 
      */
     @RequestMapping(value="/join.do")
     @ResponseBody
-	public String userJoin(HttpServletRequest request) {
+	public List userJoin(HttpServletRequest request) {
     	
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -107,9 +117,15 @@ public class LoginJoinController {
 			MemberService.insert(res);
 			HttpSession session = request.getSession();
 			session.setAttribute(res.getId(), res.getSteamId());
-			return res.getId();
+			List<String> list = new ArrayList<>();
+			list.add(res.getId());
+			list.add(session.getId());
+			System.out.println(list.toString());
+			return list;
 		}catch(Exception e){
 			return null;
 		}
     }
+    
+    
 }
