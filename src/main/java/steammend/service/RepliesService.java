@@ -1,6 +1,8 @@
 package steammend.service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -64,6 +66,25 @@ public class RepliesService {
 		return replyDTO;
 	}
 	
+
+	/** 동일한 communityId를 가진 모든 댓글 조회
+	 * 
+	 * @param communityId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RepliesDTO> getAllReply(Long communityId) throws Exception {
+		List<Replies> replyAllEntity = replyDAO.getAllReplyByCommunityId(communityId);
+		
+		if(replyAllEntity == null) {
+			throw new MessageException("존재하는 댓글이 없습니다.");
+		}
+		
+		List<RepliesDTO> replyAllDTO = Arrays.asList(mapper.map(replyAllEntity, RepliesDTO[].class));
+		
+		return replyAllDTO;
+	}
+	
 	
 	/** 하나의 댓글 수정
 	 * 
@@ -109,6 +130,7 @@ public class RepliesService {
 		}
 		return true;
 	}
+
 
 
 

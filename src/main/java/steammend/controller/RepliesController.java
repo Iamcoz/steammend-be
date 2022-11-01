@@ -1,5 +1,7 @@
 package steammend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,13 @@ public class RepliesController {
 	@GetMapping("/reply")
 	public RepliesDTO reply(Long id) throws Exception {
 		return replyService.getReply(id);
+	}
+	
+	
+	/* 동일한 communityId를 가진 모든 댓글 조회 */
+	@GetMapping("/allReply")
+	public List<RepliesDTO> allReply(Long communityId) throws Exception {
+		return replyService.getAllReply(communityId);
 	}
 	
 	

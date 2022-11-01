@@ -15,7 +15,7 @@ CREATE TABLE members(
 	password VARCHAR(240) NOT NULL ,
 	name VARCHAR(20) NOT NULL,
 	nickname VARCHAR(8) NOT NULL,
-	birth DATE NOT NULL,
+	birthday DATE NOT NULL,
 	steam_id VARCHAR(50) NOT NULL,
     created_at DATETIME DEFAULT NULL,
     updated_at DATETIME DEFAULT NULL,

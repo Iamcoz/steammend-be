@@ -1,5 +1,7 @@
 package steammend.test;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,6 +42,19 @@ public class RepliesTest {
 		try {
 			RepliesDTO reply = replyService.getReply(id);
 			System.out.println("****** \n"+reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* 동일한 communityId를 가진 모든 댓글 조회 */
+	@Test
+	void allReply() {
+		Long communityId = 2L;
+		
+		try {
+			List<RepliesDTO> allReply = replyService.getAllReply(communityId);
+			System.out.println("***** allReply\n" + allReply + "\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
