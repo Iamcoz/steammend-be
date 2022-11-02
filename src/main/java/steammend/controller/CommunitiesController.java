@@ -35,11 +35,6 @@ public class CommunitiesController {
 	public List<CommunitiesDTO> allCommunity(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
 		return commuService.getAllCommunity(pageable);
 	}
-	/* 전체 게시글 조회 */
-//	@GetMapping("/allCommunity")
-//	public List<CommunitiesDTO> allCommunity() throws Exception{
-//		return commuService.getAllCommunity();
-//	}
 	
 	
 	/* 하나의 게시글 조회수 1씩 증가하며 조회 */

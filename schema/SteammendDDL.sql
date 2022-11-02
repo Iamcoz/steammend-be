@@ -40,6 +40,8 @@ ALTER TABLE communities ADD CONSTRAINT FOREIGN KEY(member_id) REFERENCES members
 CREATE TABLE attachments(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
 	community_id BIGINT NOT NULL,
+    original_name VARCHAR(150) NOT NULL,
+    upload_name VARCHAR(50) NOT NULL,
 	upload_path VARCHAR(150) NOT NULL,
     created_at DATETIME DEFAULT NULL,
     updated_at DATETIME DEFAULT NULL,

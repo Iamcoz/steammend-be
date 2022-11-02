@@ -89,7 +89,6 @@ public class CommunitiesService {
 		}
 		
 		CommunitiesDTO commuDTO = mapper.map(commuEntity.get(), CommunitiesDTO.class);
-	
 		
 		return commuDTO;
 	}

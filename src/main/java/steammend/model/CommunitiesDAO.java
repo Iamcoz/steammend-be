@@ -32,5 +32,3 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 	Page<Communities> findByKeywordContaining(String keyword, Pageable pageable);
 
 }
-
-// 

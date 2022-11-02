@@ -97,7 +97,7 @@ public class CommunitiesTest {
 	
 	
 	/* 제목 or 내용에 특정 키워드를 포함한 게시글을 10개씩 페이징 하여 조회 */
-	@Test
+//	@Test
 	void searchCommunity() {
 		String keyword = "제";
 		Pageable pagable = PageRequest.of(0, 2, Sort.Direction.DESC, "id");
@@ -108,8 +108,6 @@ public class CommunitiesTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-        
 	}
 	
 	
