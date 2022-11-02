@@ -1,5 +1,7 @@
 package steammend.test;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +38,7 @@ public class CommunitiesTest {
 	}
 	
 	
-	/* 전체 게시글을 10개씩 페이징 하여 조회 */
+	/* 삭제되지 않은 게시글들만 10개씩 페이징 하여 조회 */
 //	@Test
 	void allCommunity() {
 		Pageable pagable = PageRequest.of(1, 10, Sort.Direction.DESC, "id");
@@ -82,7 +84,7 @@ public class CommunitiesTest {
 	
 	
 	/* 하나의 게시글 삭제(수정) */
-	@Test
+//	@Test
 	void deleteCommunity() {
 		Long id = 10L;
 		
@@ -91,6 +93,23 @@ public class CommunitiesTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	/* 제목 or 내용에 특정 키워드를 포함한 게시글을 10개씩 페이징 하여 조회 */
+	@Test
+	void searchCommunity() {
+		String keyword = "제";
+		Pageable pagable = PageRequest.of(0, 2, Sort.Direction.DESC, "id");
+
+        try {
+			List<CommunitiesDTO> searchCommunity = commuService.searchCommunity(keyword, pagable);
+			System.out.println("*****\n " + searchCommunity + "\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        
 	}
 	
 	

@@ -54,14 +54,14 @@ public class CommunitiesService {
 	}
 	
 	
-	/** 전체 게시글을 10개씩 페이징 하여 조회
+	/** 삭제되지 않은 게시글들만 10개씩 페이징 하여 조회
 	 * 
 	 * @param pageable
 	 * @return
 	 * @throws Exception
 	 */
 	public List<CommunitiesDTO> getAllCommunity(Pageable pageable) throws Exception{
-		Page<Communities> commuAllPageEntity = commuDAO.findAll(pageable);
+		Page<Communities> commuAllPageEntity = commuDAO.findByIsDeletedFalse(pageable);
 		List<Communities> commuAllEntity = commuAllPageEntity.getContent();
 		
 		if(commuAllEntity == null) {
@@ -72,18 +72,6 @@ public class CommunitiesService {
 		
 		return commuAllDTO;
 	}
-	/* 전체 게시글 조회 */
-//	public List<CommunitiesDTO> getAllCommunity() throws Exception{
-//		List<Communities> commuAllEntity = commuDAO.findAll();
-//		
-//		if(commuAllEntity == null) {
-//			throw new MessageException("존재하는 게시글이 없습니다.");
-//		}
-//		
-//		List<CommunitiesDTO> commuAllDTO = Arrays.asList(mapper.map(commuAllEntity, CommunitiesDTO[].class));
-//		
-//		return commuAllDTO;
-//	}
 
 	
 	/** 하나의 게시글 조회
@@ -165,25 +153,48 @@ public class CommunitiesService {
 		}
 		return true;
 	}
-//
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
+
+	
+	/** 제목 or 내용에 특정 키워드를 포함한 게시글을 10개씩 페이징 하여 조회
+	 * 
+	 * @param keyword
+	 * @param pageable
+	 * @return
+	 * @throws Exception
+	 */
+	public List<CommunitiesDTO> searchCommunity(String keyword, Pageable pageable) throws Exception {
+		Page<Communities> searchCommunityPageEntity = commuDAO.findByKeywordContaining(keyword, pageable);
+		List<CommunitiesDTO> searchCommuDTO = null;
+		
+		if (keyword == null) {
+			searchCommuDTO = getAllCommunity(pageable);
+		} else {
+			List<Communities> searchCommunityEntity = searchCommunityPageEntity.getContent();
+			
+			if(searchCommunityEntity == null) {
+				throw new MessageException("존하는 검색 결과가 없습니다.");
+			}
+			
+			searchCommuDTO = Arrays.asList(mapper.map(searchCommunityEntity, CommunitiesDTO[].class));
+		}
+		
+		return searchCommuDTO;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 ////	/** 하나의 첨부파일 등록
 ////	 * 
 ////	 * @param atchDTO

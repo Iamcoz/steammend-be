@@ -69,9 +69,11 @@ public class CommunitiesController {
 	}
 	
 	
-	
-	
-	
+	/* 검색된 게시글을 10개씩 페이징 하여 조회 */
+	@GetMapping("/search")
+	public List<CommunitiesDTO> searchCommunity(String keyword, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) throws Exception{
+		return commuService.searchCommunity(keyword, pageable);
+	}
 	
 	
 	
