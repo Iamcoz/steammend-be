@@ -19,20 +19,26 @@ import steammend.model.entity.Attachments;
 public class AttachmentsDTO {
 	private Long id;
 	private Long communityId;
-	private String path;
+	private String originalName; 
+	private String uploadName;
+	private String uploadPath;
 	private String createdAt;
 	private String updatedAt;
 	private boolean isDeleted;
 	
-	public AttachmentsDTO(Long communityId, String path) {
-		this.id = communityId;
-		this.path = path;
+	public AttachmentsDTO(Long communityId, String originalName, String uploadName, String uploadPath) {
+		this.communityId = communityId;
+		this.originalName = originalName;
+		this.uploadName = uploadName;
+		this.uploadPath = uploadPath;
 	}
 	
 	public Attachments toEntity() {
 		return 	Attachments.builder().
 				communityId(communityId).
-				path(path).
+				originalName(originalName).
+				uploadName(uploadName).
+				uploadPath(uploadPath).
 				build();
 	}
 }

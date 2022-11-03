@@ -38,7 +38,13 @@ public class Attachments {// extends Base {
 	private Long communityId;
 	
 	@NonNull
-	private String path;
+	private String originalName;
+	
+	@NonNull
+	private String uploadName;
+	
+	@NonNull
+	private String uploadPath;
 	
 	@CreatedDate
 	private LocalDateTime createdAt;

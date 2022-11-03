@@ -1,12 +1,14 @@
 package steammend.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
+import steammend.model.dto.AttachmentsDTO;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -55,8 +58,12 @@ public class Communities {// extends Base {
 	private LocalDateTime updatedAt;
 
 	private boolean isDeleted;
-
-//	private List<Attachments> attachments = new 
 	
+//	private Long attachmentId;
+	
+//	@OneToMany(mappedBy = "communityId")
+//	private List<Attachments> attachments;
+	
+//	private AttachmentsDTO attachment;
 	
 }

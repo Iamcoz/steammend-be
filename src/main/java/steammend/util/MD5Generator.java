@@ -14,7 +14,7 @@ public class MD5Generator {
 	
 	private String result;
 	
-	public MD5Generator(String input) throws UnsupportedEncodingException, NoSuchAlgorithmException{
+	public MD5Generator(String input) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		MessageDigest mdMD5 = MessageDigest.getInstance("MD5");
 		mdMD5.update(input.getBytes("UTF-8"));
 		
