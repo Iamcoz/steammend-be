@@ -31,9 +31,5 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
-	
-//	@Bean
-//    public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
-//        return new GenericJackson2JsonRedisSerializer();
-//    }
+
 }

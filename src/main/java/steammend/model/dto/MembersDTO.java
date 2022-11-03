@@ -37,12 +37,6 @@ public class MembersDTO {
 				build();
 	}
 	
-//	public MembersDTO(String id, String password) {
-//		super();
-//		this.id = id;
-//		this.password = password;
-//	}
-	
 	public MembersDTO(String id, String steamId) {
 		super();
 		this.id = id;
