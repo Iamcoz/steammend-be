@@ -47,11 +47,11 @@ public class LoginJoinController {
 	 * 
 	 * @logic : login 가능한지 판단
 	 * 
-	 * @return : 회원인 경우 회원 id, 아닌 경우 fail
+	 * @return : 회원인 경우 회원  string 배열(member id, nickname), 아닌 경우 null
 	 */
 	@RequestMapping(value="/userlogin.do")
 	@ResponseBody
-	public String userLogin(HttpServletRequest request) {
+	public String[] userLogin(HttpServletRequest request) {
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -61,10 +61,11 @@ public class LoginJoinController {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute(res.getId(), res.getSteamId());
-			return res.getId();
+			String[] ist = {res.getId(), res.getNickname()};
+			return ist;
 		}
 		else {
-			return "fail";
+			return null;
 		}
     }
 	
@@ -89,11 +90,11 @@ public class LoginJoinController {
      * 	
      * 	@logic : id 중복 확인
      * 
-     * 	@return : sql insert 성공하면회원 id, 실패하면 fail
+     * 	@return : sql insert 성공하면회원 string 배열(member id, nickname), 실패하면 fail
      */
     @RequestMapping(value="/join.do")
     @ResponseBody
-	public String userJoin(HttpServletRequest request) {
+	public String[] userJoin(HttpServletRequest request) {
     	
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -107,9 +108,10 @@ public class LoginJoinController {
 			MemberService.insert(res);
 			HttpSession session = request.getSession();
 			session.setAttribute(res.getId(), res.getSteamId());
-			return res.getId();
+			String[] ist = {res.getId(), res.getNickname()};
+			return ist;
 		}catch(Exception e){
-			return "fail";
+			return null;
 		}
     }
 }
