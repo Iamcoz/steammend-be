@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="steammend.model.MemberMapper">
+ <select id="findById" parameterType = "steammend.model.dto.MembersDTO" resultType="steammend.model.dto.MembersDTO">
+  
+ 	select * from members where id=#{id};
+ 	
+ </select>
+</mapper>

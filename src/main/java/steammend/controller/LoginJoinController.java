@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,8 +59,14 @@ public class LoginJoinController {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
 			
 			HttpSession session = request.getSession();
-			session.setAttribute(res.getId(), res.getSteamId());
+//			session.setAttribute(res.getId(), res.getSteamId());
+			
+			String[] ist = {res.getSteamId(), res.getNickname()};
+			System.out.println(ist[1].getClass().getName());
+			session.setAttribute(res.getId(), ist);
+			System.out.println("session value : " + session.getAttribute(res.getId()));
 			return res.getId();
+			
 		}
 		else {
 			return "fail";
