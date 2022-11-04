@@ -42,7 +42,7 @@ public class Members {
 	private String nickname;
 	
 	@NonNull
-	private String birth;
+	private String birthday;
 	
 	@NonNull
 	private String steamId;

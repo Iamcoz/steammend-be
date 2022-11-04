@@ -1,16 +1,12 @@
 package steammend.service;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import steammend.model.dto.MembersDTO;
 
-import steammend.model.MembersDAO;
-
-@Service
-public class MemberService {
-
-	@Autowired
-	private MembersDAO memberDAO;
+public interface MemberService {
+	public MembersDTO login(MembersDTO dto);
 	
-	private ModelMapper mapper = new ModelMapper();
+	public MembersDTO insert(MembersDTO dto);
+	
+	public MembersDTO findById(String id);
+	
 }
