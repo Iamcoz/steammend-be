@@ -1,9 +1,13 @@
 package steammend.controller;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +27,7 @@ public class RepliesController {
 	/* 하나의 댓글 작성 */
 	@PostMapping("/add")
 	public boolean addReply(@RequestBody RepliesDTO replyDTO) throws Exception {
+<<<<<<< HEAD
 		return replyService.addReply(replyDTO);
 	}
 	
@@ -56,4 +61,10 @@ public class RepliesController {
 		return replyService.deleteReply(replyDTO.getId());
 	}
 	
+=======
+		System.out.println("**** ReplyDTO : "+replyDTO);
+		return replyService.addReply(replyDTO);
+	}
+	
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 }

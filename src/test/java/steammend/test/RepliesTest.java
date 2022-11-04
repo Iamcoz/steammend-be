@@ -1,7 +1,10 @@
 package steammend.test;
 
+<<<<<<< HEAD
 import java.util.List;
 
+=======
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,11 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import steammend.model.dto.RepliesDTO;
 import steammend.service.RepliesService;
 
+<<<<<<< HEAD
 /** given / when / then 수정 필요
  * 
  * @author oz
  *
  */
+=======
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 @SpringBootTest
 public class RepliesTest {
 
@@ -24,7 +30,11 @@ public class RepliesTest {
 	/* 하나의 댓글 등록 */
 //	@Test
 	void addReply() {
+<<<<<<< HEAD
 		RepliesDTO replyDTO = new RepliesDTO(2L, "coz", "내용");
+=======
+		RepliesDTO replyDTO = new RepliesDTO(31L, "coz", "내용");
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 		
 		try {
 			replyService.addReply(replyDTO);
@@ -32,6 +42,7 @@ public class RepliesTest {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	
 	
 	/* 하나의 댓글 조회 */
@@ -87,4 +98,6 @@ public class RepliesTest {
 			e.printStackTrace();
 		}
 	}
+=======
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 }

@@ -1,5 +1,6 @@
 package steammend.service;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+=======
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import steammend.model.entity.Replies;
 
 @Service
 public class RepliesService {
+<<<<<<< HEAD
 
 	@Autowired
 	private RepliesDAO replyDAO;
@@ -26,12 +30,23 @@ public class RepliesService {
 
 	/**
 	 * 하나의 댓글 작성
+=======
+	
+	@Autowired
+	private RepliesDAO replyDAO;
+	
+	private ModelMapper mapper = new ModelMapper();
+	
+	
+	/** 하나의 댓글 작성
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 	 * 
 	 * @param replyDTO
 	 * @return
 	 * @throws Exception
 	 */
 	public boolean addReply(RepliesDTO replyDTO) throws Exception {
+<<<<<<< HEAD
 		replyDTO.setDeleted(false);
 		Replies replyEntity = mapper.map(replyDTO, Replies.class);
 
@@ -39,6 +54,15 @@ public class RepliesService {
 			replyEntity = replyDAO.save(replyEntity);
 
 			if (replyEntity != null) {
+=======
+		replyDTO.setState(true);
+		Replies replyEntity = mapper.map(replyDTO, Replies.class);
+		
+		try {
+			replyEntity = replyDAO.save(replyEntity);
+			
+			if(replyEntity != null) {
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 				return true;
 			}
 		} catch (Exception e) {
@@ -46,6 +70,7 @@ public class RepliesService {
 		}
 		return false;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * 하나의 댓글 조회
@@ -131,4 +156,7 @@ public class RepliesService {
 		return true;
 	}
 
+=======
+	
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 }

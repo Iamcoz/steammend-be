@@ -1,9 +1,12 @@
 package steammend.model;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+=======
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +17,7 @@ import steammend.model.entity.Communities;
 @Repository
 public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 
+<<<<<<< HEAD
 	Page<Communities> findByIsDeletedFalse(Pageable pageable);
 	
 	@Modifying(clearAutomatically = true)
@@ -31,4 +35,17 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 	@Query("SELECT c FROM Communities c WHERE c.isDeleted = 0 AND (c.title LIKE CONCAT('%',:keyword,'%') OR c.content LIKE CONCAT('%',:keyword,'%'))")
 	Page<Communities> findByKeywordContaining(String keyword, Pageable pageable);
 
+=======
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Communities c SET c.hit = c.hit+1 WHERE c.communityId = :communityId")
+	int updateHitByCommunityId(Long communityId);
+	
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Communities c SET c.header = :header, c.title = :title, c.content = :content WHERE c.communityId = :communityId AND c.memberId = :memberId")
+	int updateCommunityByCommunityId(Long communityId, String header, String title, String content, String memberId);
+
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Communities c SET c.isState = 0 WHERE c.communityId = :communityId")
+	int deleteCommunityByCommunityId(Long communityId);
+>>>>>>> 64b5a69883bf581dea0840e8525d2b9d76f387d8
 }
