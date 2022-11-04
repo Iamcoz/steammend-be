@@ -18,14 +18,14 @@ import steammend.model.entity.Replies;
 
 @Service
 public class RepliesService {
-	
+
 	@Autowired
 	private RepliesDAO replyDAO;
-	
+
 	private ModelMapper mapper = new ModelMapper();
-	
-	
-	/** 하나의 댓글 작성
+
+	/**
+	 * 하나의 댓글 작성
 	 * 
 	 * @param replyDTO
 	 * @return
@@ -34,11 +34,11 @@ public class RepliesService {
 	public boolean addReply(RepliesDTO replyDTO) throws Exception {
 		replyDTO.setDeleted(false);
 		Replies replyEntity = mapper.map(replyDTO, Replies.class);
-		
+
 		try {
 			replyEntity = replyDAO.save(replyEntity);
-			
-			if(replyEntity != null) {
+
+			if (replyEntity != null) {
 				return true;
 			}
 		} catch (Exception e) {
@@ -46,9 +46,9 @@ public class RepliesService {
 		}
 		return false;
 	}
-	
-	
-	/** 하나의 댓글 조회
+
+	/**
+	 * 하나의 댓글 조회
 	 * 
 	 * @param id
 	 * @return
@@ -56,18 +56,18 @@ public class RepliesService {
 	 */
 	public RepliesDTO getReply(Long id) throws Exception {
 		Optional<Replies> replyEntity = replyDAO.findById(id);
-		
-		if(replyEntity.get() == null) {
+
+		if (replyEntity.get() == null) {
 			throw new MessageException("존재하지 않는 댓글입니다.");
 		}
-		
+
 		RepliesDTO replyDTO = mapper.map(replyEntity.get(), RepliesDTO.class);
-		
+
 		return replyDTO;
 	}
-	
 
-	/** 동일한 communityId를 가진 모든 댓글 조회
+	/**
+	 * 동일한 communityId를 가진 모든 댓글 조회
 	 * 
 	 * @param communityId
 	 * @return
@@ -75,18 +75,18 @@ public class RepliesService {
 	 */
 	public List<RepliesDTO> getAllReply(Long communityId) throws Exception {
 		List<Replies> replyAllEntity = replyDAO.getAllReplyByCommunityId(communityId);
-		
-		if(replyAllEntity == null) {
+
+		if (replyAllEntity == null) {
 			throw new MessageException("존재하는 댓글이 없습니다.");
 		}
-		
+
 		List<RepliesDTO> replyAllDTO = Arrays.asList(mapper.map(replyAllEntity, RepliesDTO[].class));
-		
+
 		return replyAllDTO;
 	}
-	
-	
-	/** 하나의 댓글 수정
+
+	/**
+	 * 하나의 댓글 수정
 	 * 
 	 * @param replyId
 	 * @param content
@@ -95,12 +95,12 @@ public class RepliesService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public boolean modifyReply(Long replyId, String content, String memberId/*session*/) throws Exception {
+	public boolean modifyReply(Long replyId, String content, String memberId/* session */) throws Exception {
 		RepliesDTO replyDTO = getReply(replyId);
-		
+
 		int result = 0;
-		
-		if(replyId != 0 && replyDTO.getMemberId() != null) {  // 임시코드
+
+		if (replyId != 0 && replyDTO.getMemberId() != null) { // 임시코드
 //		if(replyId != 0 && replyDTO.getMemberId() == 세션id값) {  // 수정 방향 코드
 			result = replyDAO.updateReplyContentByReplyId(replyId, content, LocalDateTime.now(), memberId);
 		} else if (result == 0) {
@@ -108,9 +108,9 @@ public class RepliesService {
 		}
 		return true;
 	}
-	
-	
-	/** 하나의 댓글 삭제(수정)
+
+	/**
+	 * 하나의 댓글 삭제(수정)
 	 * 
 	 * @param id
 	 * @return
@@ -119,27 +119,16 @@ public class RepliesService {
 	@Transactional
 	public boolean deleteReply(Long id) throws Exception {
 		RepliesDTO replyDTO = getReply(id);
-		
+
 		int result = 0;
-		
-		if(id != 0 && replyDTO.isDeleted() == false && replyDTO.getMemberId() !=  null) { // 임시 코드
+
+		if (id != 0 && replyDTO.isDeleted() == false && replyDTO.getMemberId() != null) { // 임시 코드
 //		if(replyId != 0 && replyDTO.isState() == true && replyDTO.getMemberId() == 세션값) { // 수정 지향
 			result = replyDAO.deleteReplyByReplyId(id, LocalDateTime.now());
-		} else if(result == 0) {
+		} else if (result == 0) {
 			throw new MessageException("댓글 삭제 실패");
 		}
 		return true;
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -29,7 +29,7 @@ import lombok.ToString;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Replies {//extends Base {
+public class Replies {
 	
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

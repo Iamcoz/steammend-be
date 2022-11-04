@@ -27,15 +27,15 @@ public class CommunitiesTest {
 	
 	/* 하나의 게시글 등록 */
 //	@Test
-	void addCommunity() {
-		CommunitiesDTO commuDTO = new CommunitiesDTO("coz", "말머리", "제목", "내용");
-		
-		try {
-			commuService.addCommunity(commuDTO);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	void addCommunity() {
+//		CommunitiesDTO commuDTO = new CommunitiesDTO("coz", "말머리", "제목", "내용");
+//		
+//		try {
+//			commuService.addCommunity(commuDTO);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 	/* 삭제되지 않은 게시글들만 10개씩 페이징 하여 조회 */
@@ -84,7 +84,7 @@ public class CommunitiesTest {
 	
 	
 	/* 하나의 게시글 삭제(수정) */
-//	@Test
+	@Test
 	void deleteCommunity() {
 		Long id = 10L;
 		

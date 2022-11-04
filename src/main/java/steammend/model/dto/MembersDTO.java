@@ -15,6 +15,7 @@ import steammend.model.entity.Members;
 @Builder
 @ToString
 public class MembersDTO {
+	
 	private String id;
 	private String password;
 	private String name;
@@ -24,6 +25,7 @@ public class MembersDTO {
 	private String createdAt;
 	private String updatedAt;
 	private boolean isDeleted;
+	
 	
 	public MembersDTO(String id, String password, String name, String nickname, String birth, String steamId, boolean isDeleted) {
 		this.id = id;

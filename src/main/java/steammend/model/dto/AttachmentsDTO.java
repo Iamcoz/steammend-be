@@ -15,8 +15,8 @@ import steammend.model.entity.Attachments;
 @Builder
 @ToString
 
-//@ConfigurationProperties(prefix="file")
 public class AttachmentsDTO {
+	
 	private Long id;
 	private Long communityId;
 	private String originalName; 
@@ -25,6 +25,7 @@ public class AttachmentsDTO {
 	private String createdAt;
 	private String updatedAt;
 	private boolean isDeleted;
+	
 	
 	public AttachmentsDTO(Long communityId, String originalName, String uploadName, String uploadPath) {
 		this.communityId = communityId;

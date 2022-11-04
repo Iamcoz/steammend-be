@@ -1,6 +1,5 @@
 package steammend.service;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -13,14 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import steammend.exception.MessageException;
 import steammend.model.CommunitiesDAO;
-import steammend.model.dto.AttachmentsDTO;
 import steammend.model.dto.CommunitiesDTO;
 import steammend.model.entity.Communities;
-import steammend.util.MD5Generator;
 
 @Service
 public class CommunitiesService {
@@ -37,51 +33,24 @@ public class CommunitiesService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean addCommunity(CommunitiesDTO commuDTO, MultipartFile attachment) {// throws Exception {
+	public boolean addCommunity(CommunitiesDTO commuDTO) {// throws Exception {
+		System.out.println("**** Service addCommunity " + commuDTO);
+		System.out.println("*********commuDTO\n" + commuDTO);
 
+		Communities commuEntity = mapper.map(commuDTO, Communities.class);
+		System.out.println("*********\n" + commuEntity);
 		try {
-			String originalName = attachment.getOriginalFilename();
-			String uploadName = new MD5Generator(originalName).toString();
+			commuEntity = commuDAO.save(commuEntity);
 
-			// local 파일 저장 위치
-			String saveDir = File.separator + "Steammend" + File.separator + "download" + File.separator;
-
-			// savePath dir 미 존재시 경로 생성
-			if (!new File(saveDir).exists()) {
-				try {
-					new File(saveDir).mkdir();
-				} catch (Exception e) {
-					e.getStackTrace();
-				}
+			if (commuEntity != null) {
+				return true;
 			}
-
-			String uploadPath = saveDir + File.separator + uploadName;
-			attachment.transferTo(new File(uploadPath));
-			
-			AttachmentsDTO atchDTO = new AttachmentsDTO(commuDTO.getId(), originalName, uploadName, uploadPath);
-			
-
 		} catch (Exception e) {
 			e.printStackTrace();
+//			throw new MessageException("게시글 작성 실패");
 		}
-		return true;
 
-
-//		System.out.println("*********commuDTO\n"+commuDTO);
-//		Communities commuEntity = mapper.map(commuDTO, Communities.class);
-//		System.out.println("*********\n"+commuEntity);
-//		try {
-//			commuEntity = commuDAO.save(commuEntity);
-//
-//			if (commuEntity != null) {
-//				return true;
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-////			throw new MessageException("게시글 작성 실패");
-//		}
-//
-//		return false;
+		return false;
 	}
 
 	/**
@@ -127,7 +96,7 @@ public class CommunitiesService {
 	/**
 	 * 게시글 조회 시 조회수 1씩 증가
 	 * 
-	 * @param communityId
+	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
@@ -211,38 +180,4 @@ public class CommunitiesService {
 
 		return searchCommuDTO;
 	}
-
-////	/** 하나의 첨부파일 등록
-////	 * 
-////	 * @param atchDTO
-////	 * @return
-////	 * @throws Exception
-////	 */
-////	@Transactional
-////	public Long addCommunity(CommunitiesDTO commuDTO, AttachmentsDTO atchDTO) throws Exception {
-////		Communities commuEntity = mapper.map(commuDTO, Communities.class);
-////		Attachments atchEntity = mapper.map(atchDTO, Attachments.class);
-////		
-////		return atchDAO.save(atchEntity).getAttachmentId();
-////	}
-//	
-////	public boolean addCommu(CommunitiesDTO commuDTO) throws Exception {
-////		Communities commuEntity = mapper.map(commuDTO, Communities.class);
-//////		Communities commuEntity = commuDTO.toEntity(); //mapper.map(commuDTO, Communities.class);
-////		
-////		boolean result = false;
-////		
-////		try {
-////			commuEntity = commuDAO.save(commuEntity);
-////			
-////			if (commuEntity != null) {
-////				result = true;
-////			}
-////		} catch (Exception e) {
-////			throw new MessageException("게시글 작성 실패");
-////		}
-////		
-////		return result;
-////	}
-
 }

@@ -27,7 +27,7 @@ import lombok.ToString;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Members {// extends Base {
+public class Members {
 	
 	@Id
 	private String id;
@@ -54,6 +54,5 @@ public class Members {// extends Base {
 	private LocalDateTime updatedAt;
 
 	private boolean isDeleted;
-	
 
 }
