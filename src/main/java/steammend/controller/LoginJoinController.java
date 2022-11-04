@@ -46,7 +46,7 @@ public class LoginJoinController {
 	 * 
 	 * @logic : login 가능한지 판단
 	 * 
-	 * @return : 회원인 경우 회원 id, 아닌 경우 fail
+	 * @return : 회원인 경우 id, 아닌 경우 fail
 	 */
 	@RequestMapping(value="/userlogin.do")
 	@ResponseBody
@@ -59,14 +59,9 @@ public class LoginJoinController {
 			MembersDTO res = MemberService.login(MemberServiceImpl.checkLogin(id, pw));
 			
 			HttpSession session = request.getSession();
-//			session.setAttribute(res.getId(), res.getSteamId());
-			
 			String[] ist = {res.getSteamId(), res.getNickname()};
-			System.out.println(ist[1].getClass().getName());
 			session.setAttribute(res.getId(), ist);
-			System.out.println("session value : " + session.getAttribute(res.getId()));
 			return res.getId();
-			
 		}
 		else {
 			return "fail";
@@ -94,7 +89,7 @@ public class LoginJoinController {
      * 	
      * 	@logic : id 중복 확인
      * 
-     * 	@return : sql insert 성공하면회원 id, 실패하면 fail
+     * 	@return : sql insert 성공하면 id, 실패하면 fail
      */
     @RequestMapping(value="/join.do")
     @ResponseBody
@@ -111,7 +106,8 @@ public class LoginJoinController {
 		try {
 			MemberService.insert(res);
 			HttpSession session = request.getSession();
-			session.setAttribute(res.getId(), res.getSteamId());
+			String[] ist = {res.getSteamId(), res.getNickname()};
+			session.setAttribute(res.getId(), ist);
 			return res.getId();
 		}catch(Exception e){
 			return "fail";
