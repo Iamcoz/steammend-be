@@ -31,4 +31,6 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 	@Query("SELECT c FROM Communities c WHERE c.isDeleted = 0 AND (c.title LIKE CONCAT('%',:keyword,'%') OR c.content LIKE CONCAT('%',:keyword,'%'))")
 	Page<Communities> findByKeywordContaining(String keyword, Pageable pageable);
 
+	@Query("SELECT MAX(c.id) FROM Communities c")
+	Long findIdByMaxId();
 }
