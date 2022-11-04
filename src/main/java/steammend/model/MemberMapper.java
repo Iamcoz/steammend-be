@@ -15,6 +15,5 @@ public interface MemberMapper {
 	public MembersDTO insert(MembersDTO dto);
 	
 	public MembersDTO findById(String id);
-	
 
 }

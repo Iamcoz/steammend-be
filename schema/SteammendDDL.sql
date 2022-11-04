@@ -3,7 +3,6 @@ use steammend;
 
 
 # drop
-DROP TABLE IF EXISTS attachments;
 DROP TABLE IF EXISTS replies;
 DROP TABLE IF EXISTS communities;
 DROP TABLE IF EXISTS members;
@@ -35,19 +34,6 @@ CREATE TABLE communities(
 	is_deleted TINYINT(1) NOT NULL DEFAULT 0
 );
 ALTER TABLE communities ADD CONSTRAINT FOREIGN KEY(member_id) REFERENCES members(id);
-
-
-CREATE TABLE attachments(
-	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-	community_id BIGINT NOT NULL,
-    original_name VARCHAR(150) NOT NULL,
-    upload_name VARCHAR(50) NOT NULL,
-	upload_path VARCHAR(150) NOT NULL,
-    created_at DATETIME DEFAULT NULL,
-    updated_at DATETIME DEFAULT NULL,
-    is_deleted TINYINT(1) NOT NULL DEFAULT 0
-);
-ALTER TABLE attachments ADD CONSTRAINT FOREIGN KEY(community_id) REFERENCES communities(id);
 
 
 CREATE TABLE replies(
