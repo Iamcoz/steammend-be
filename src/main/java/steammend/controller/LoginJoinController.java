@@ -90,7 +90,7 @@ public class LoginJoinController {
      * 	
      * 	@logic : id 중복 확인
      * 
-     * 	@return : sql insert 성공하면회원 string 배열(member id, nickname), 실패하면 fail
+     * 	@return : sql insert 성공 string 배열(member id, nickname), 실패 null
      */
     @RequestMapping(value="/join.do")
     @ResponseBody
