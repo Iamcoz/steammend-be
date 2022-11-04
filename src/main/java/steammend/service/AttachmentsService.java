@@ -2,6 +2,7 @@ package steammend.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import steammend.exception.MessageException;
 import steammend.model.AttachmentsDAO;
+import steammend.model.CommunitiesDAO;
 import steammend.model.dto.AttachmentsDTO;
 import steammend.model.entity.Attachments;
 
@@ -17,6 +19,9 @@ public class AttachmentsService {
 
 	@Autowired
 	private AttachmentsDAO atchDAO;
+	
+	@Autowired
+	private CommunitiesDAO commuDAO;
 
 	private ModelMapper mapper = new ModelMapper();
 
@@ -26,21 +31,41 @@ public class AttachmentsService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Long addAttachment(AttachmentsDTO atchDTO) throws Exception {
+	public boolean addAttachment(AttachmentsDTO atchDTO) throws Exception {
+		atchDTO.setCommunityId(commuDAO.findIdByMaxId());
 		Attachments atchEntity = mapper.map(atchDTO, Attachments.class);
 
 		try {
 			atchEntity = atchDAO.save(atchEntity);
 
 			if (atchEntity != null) {
-				return atchDTO.getId();
+				return true;
 			}
 		} catch (Exception e) {
 			throw new MessageException("첨부파일 등록 실패");
 		}
-		return atchDTO.getId(); // null;
+		return false;
 	}
 
+	/** 하나의 첨부파일 조회
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public AttachmentsDTO getAttachment(Long id) throws Exception {
+		Optional<Attachments> atchEntity = atchDAO.findById(id);
+
+		if (atchEntity.get() == null) {
+			throw new MessageException("존재하지 않는 첨부파일입니다.");
+		}
+
+		AttachmentsDTO atchDTO = mapper.map(atchEntity.get(), AttachmentsDTO.class);
+
+		return atchDTO;
+	}
+
+	
 	/** 동일한 communityId를 가진 모든 첨부파일 조회
 	 * 
 	 * @param communityId

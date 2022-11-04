@@ -33,12 +33,9 @@ public class CommunitiesService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean addCommunity(CommunitiesDTO commuDTO) {// throws Exception {
-		System.out.println("**** Service addCommunity " + commuDTO);
-		System.out.println("*********commuDTO\n" + commuDTO);
-
+	public boolean addCommunity(CommunitiesDTO commuDTO) throws Exception {
 		Communities commuEntity = mapper.map(commuDTO, Communities.class);
-		System.out.println("*********\n" + commuEntity);
+
 		try {
 			commuEntity = commuDAO.save(commuEntity);
 
@@ -46,8 +43,7 @@ public class CommunitiesService {
 				return true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-//			throw new MessageException("게시글 작성 실패");
+			throw new MessageException("게시글 작성 실패");
 		}
 
 		return false;

@@ -1,7 +1,10 @@
 package steammend.controller;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +22,6 @@ import steammend.model.dto.AttachmentsDTO;
 import steammend.model.dto.CommunitiesDTO;
 import steammend.service.AttachmentsService;
 import steammend.service.CommunitiesService;
-import steammend.util.MD5Generator;
 
 @RestController
 @RequestMapping("community")
@@ -31,31 +33,20 @@ public class CommunitiesController {
 	@Autowired
 	private AttachmentsService atchService;
 
-	/* 하나의 게시글 작성 */
-//	@PostMapping("/add")
-//	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
-//		return commuService.addCommunity(commuDTO);
-//	}
-
 	/* 하나의 게시글 작성 + 첨부파일 */
 	@PostMapping(value = "/add", consumes = { "multipart/form-data" })
 	public boolean addCommunity(CommunitiesDTO commuDTO,
-			@RequestPart(value = "attachment", required = false) MultipartFile attachment) throws Exception {// List<MultipartFile>
-																												// attachments)
-																												// {//
-																												// throws
-																												// Exception
-																												// {
+			@RequestPart(value = "attachment", required = false) MultipartFile attachment) throws Exception {
 		System.out.println("**** controller addCommunity\n" + attachment);
 
 		try {
 
 			String originalName = attachment.getOriginalFilename();
-			String uploadName = new MD5Generator(originalName).toString();
+			String uploadNameExt = originalName.substring(originalName.lastIndexOf("."));
+			String uploadName = UUID.randomUUID().toString();
 
-			// local 파일 저장 위치
 //			String saveDir = System.getProperty("user.home") + File.separator + "steammend" + File.separator + "download";
-			String saveDir = "/Users/oz/Documents/steamdownload";
+			String saveDir = "/Users/oz/Documents/steamUpload";
 
 			if (!new File(saveDir).exists()) {
 				try {
@@ -65,14 +56,13 @@ public class CommunitiesController {
 				}
 			}
 
-			String uploadPath = saveDir + File.separator + uploadName;
-			attachment.transferTo(new File(uploadPath));
+			String uploadPath = saveDir + File.separator + uploadName + uploadNameExt;
 
-			System.out.println("전 ***");
+			Path path = Paths.get(uploadPath).toAbsolutePath();
+			attachment.transferTo(path.toFile());
 
 			AttachmentsDTO atchDTO = new AttachmentsDTO(commuDTO.getId(), originalName, uploadName, uploadPath);
 			atchService.addAttachment(atchDTO);
-			System.out.println("후 ***");
 
 		} catch (Exception e) {
 			e.printStackTrace();
