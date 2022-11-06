@@ -60,6 +60,8 @@ public class LoginJoinController {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute(res.getId(), res.getSteamId());
+			System.out.println(res.getId());
+			System.out.println(res.getSteamId());
 			String[] ist = {res.getId(), res.getNickname()};
 			return ist;
 		}

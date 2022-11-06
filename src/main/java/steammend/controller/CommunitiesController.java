@@ -16,7 +16,6 @@ import steammend.model.dto.CommunitiesDTO;
 import steammend.service.CommunitiesService;
 
 @RestController
-@RequestMapping("community")
 public class CommunitiesController {
 
 	@Autowired
@@ -25,6 +24,7 @@ public class CommunitiesController {
 	/* 하나의 게시글 작성 */
 	@PostMapping("/add")
 	public boolean addCommunity(@RequestBody CommunitiesDTO commuDTO) throws Exception {
+		System.out.println(commuDTO);
 		return commuService.addCommunity(commuDTO);
 	}
 

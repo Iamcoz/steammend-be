@@ -168,7 +168,7 @@ public class CommunitiesService {
 			List<Communities> searchCommunityEntity = searchCommunityPageEntity.getContent();
 
 			if (searchCommunityEntity == null) {
-				throw new MessageException("존하는 검색 결과가 없습니다.");
+				throw new MessageException("존재하는 검색 결과가 없습니다.");
 			}
 
 			searchCommuDTO = Arrays.asList(mapper.map(searchCommunityEntity, CommunitiesDTO[].class));

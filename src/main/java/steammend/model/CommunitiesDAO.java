@@ -28,7 +28,7 @@ public interface CommunitiesDAO extends JpaRepository<Communities, Long>{
 	@Query(value = "UPDATE Communities c SET c.is_deleted = 1, c.updated_at = :updatedAt WHERE c.id = :id", nativeQuery = true)
 	int deleteCommunityByCommunityId(Long id, LocalDateTime updatedAt);
  
-	@Query("SELECT c FROM Communities c WHERE c.isDeleted = 0 AND (c.title LIKE CONCAT('%',:keyword,'%') OR c.content LIKE CONCAT('%',:keyword,'%'))")
+	@Query("SELECT c FROM Communities c WHERE c.isDeleted = 0 AND (c.title LIKE CONCAT('%',:keyword,'%') OR c.content LIKE CONCAT('%',:keyword,'%') OR c.header LIKE CONCAT('%',:keyword,'%'))")
 	Page<Communities> findByKeywordContaining(String keyword, Pageable pageable);
 
 }
